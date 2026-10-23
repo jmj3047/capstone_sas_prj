@@ -1,0 +1,37 @@
+{
+  "external_input_rows": 100000,
+  "external_unique_raw_patterns": 100000,
+  "external_invalid_target_rows": 0,
+  "external_los_rows": 100000,
+  "historical_rows": 2976,
+  "combined_rows": 102976,
+  "los_input_columns": [
+    "PATIENT_AGE",
+    "NUM_CHRONIC_COND",
+    "NUM_VISITS",
+    "DOCTOR",
+    "DEPARTMENT",
+    "GENDER",
+    "Patient location",
+    "RACE_CD",
+    "ICD9_TARGET",
+    "DIAGNOSIS_ICD_CODE"
+  ],
+  "target_definition": "ADMIT_LOS + ICU_DAYS (project assumption)",
+  "raw_pattern_overlap_external_rows": 0,
+  "predictor_only_overlap_external_rows": 50,
+  "imputation": "Training-only median, refitted within CV folds",
+  "source_files": {
+    "/Users/jmj3047/Library/CloudStorage/GoogleDrive-kathy.minjee.jang@gmail.com/내 드라이브/2026/하반기/UC/11522_Technology Capstone Research Project PG/Data/raw/table_CAPSTONE_2026_TRAIN_SET.csv": "a506f9032092954a2f118b740a121c34de3a66def0fa49ba4355d7974236b22b",
+    "/Users/jmj3047/Library/CloudStorage/GoogleDrive-kathy.minjee.jang@gmail.com/내 드라이브/2026/하반기/UC/11522_Technology Capstone Research Project PG/EDA/READMIT_3000_FE.xlsx": "0d77a9b87a96a8eca7d6fee9acaa9c7f8e17a15067c429c64b05742183b0d9ad",
+    "/Users/jmj3047/Library/CloudStorage/GoogleDrive-kathy.minjee.jang@gmail.com/내 드라이브/2026/하반기/UC/11522_Technology Capstone Research Project PG/EDA/READMIT_3000.xlsx": "dd765bac873a00fd7fc0a89b216fa3ecfd34b323df0294fb5fed3fa3ac10c3d1",
+    "/Users/jmj3047/Library/CloudStorage/GoogleDrive-kathy.minjee.jang@gmail.com/내 드라이브/2026/하반기/UC/11522_Technology Capstone Research Project PG/EDA/READMIT_FE.xlsx": "f938de1bad9622c5f2d944748f4802b19ed42ce2b9e5a3c086f5a0245ad8035e"
+  },
+  "seed": 42,
+  "limitations": [
+    "External TRAIN provenance independence is not proven by no exact row overlap.",
+    "Admission-time availability of diagnosis/doctor/department requires confirmation.",
+    "Historical TEMPLATE_ID is not a patient identifier.",
+    "Historical LOS baseline should be rerun from 3000_FE for fair comparison."
+  ]
+}

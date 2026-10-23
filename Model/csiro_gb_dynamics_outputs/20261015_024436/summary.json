@@ -1,0 +1,17 @@
+{
+  "previous_test_AP": 0.8881569837577981,
+  "validation": {
+    "AP": 0.889130957628687,
+    "ROC_AUC": 0.9683151099413526,
+    "Brier": 0.04612504355957119
+  },
+  "test": {
+    "AP": 0.8898741568167364,
+    "ROC_AUC": 0.9690825399167684,
+    "Brier": 0.044279927917186455
+  },
+  "validation_improved": true,
+  "patient_overlap": 0,
+  "clinical_validation": false,
+  "caveat": "Observed synthetic all-cause readmission; previously reported test reused."
+}

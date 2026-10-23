@@ -1,0 +1,4 @@
+﻿Feature,Definition confirmed,Available at admission confirmed,Generated without LOS confirmed,Status
+COMORBIDITY_INDEX,No,No,No,Candidate only; requires provider confirmation
+CARE_TEAM_SIZE,No,No,No,Candidate only; requires provider confirmation
+MONITORING_HOURS,No,No,No,Candidate only; requires provider confirmation

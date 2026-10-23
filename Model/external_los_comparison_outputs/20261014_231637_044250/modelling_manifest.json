@@ -1,0 +1,27 @@
+{
+  "preprocessing_run": "/Users/jmj3047/Library/CloudStorage/GoogleDrive-kathy.minjee.jang@gmail.com/내 드라이브/2026/하반기/UC/11522_Technology Capstone Research Project PG/Model/external_los_preprocessing_outputs/20261014_224830_037913",
+  "data_sha256": "f6dc715a3625f869768e0d04396a0126110f747f9eb57eb9ef72e086d74be1f3",
+  "metadata_sha256": "ffda6cd3f503e6de2faf6f8714df9d386092ed85ac97a4540ae29dc5403aad34",
+  "seed": 42,
+  "run_cv": true,
+  "cv_folds": 5,
+  "derived_features": true,
+  "selected_models": {
+    "Historical baseline": "Train median",
+    "External-only": "Train median",
+    "Combined": "Train median"
+  },
+  "selection_metric": "Common validation MAE",
+  "test_population": "Held-out Historical and CAPSTONE TRAIN rows",
+  "models": {
+    "Ridge regression": {
+      "alpha": 10
+    },
+    "Gradient boosting": {
+      "n_estimators": 100,
+      "learning_rate": 0.05,
+      "max_depth": 3,
+      "min_samples_leaf": 10
+    }
+  }
+}

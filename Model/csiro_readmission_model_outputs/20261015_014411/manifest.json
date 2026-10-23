@@ -1,0 +1,50 @@
+{
+  "seed": 42,
+  "csiro_eligible_episodes": 248523,
+  "csiro_prevalence": 0.1753117417703794,
+  "historical_profiles": 2976,
+  "historical_prevalence": 0.15793010752688172,
+  "source_hashes": {
+    "Model/csiro_readmission_preparation_outputs/csiro_inpatient_episodes.csv.gz": "2cdff934726efc7caa5a4ef50ccb9e332c8778123bfd7df1565c0394b97bd16f",
+    "EDA/READMIT_3000_FE.xlsx": "0d77a9b87a96a8eca7d6fee9acaa9c7f8e17a15067c429c64b05742183b0d9ad"
+  },
+  "max_csiro_cv_patients": 5000,
+  "jobs": 2,
+  "csiro_features": [
+    "AGE_AT_ADMISSION",
+    "CSIRO_EPISODE_LOS_DAYS",
+    "PRIOR_INPATIENT_EPISODES",
+    "ACTIVE_CONDITION_CODES_AT_DISCHARGE",
+    "GENDER"
+  ],
+  "historical_features": [
+    "ADMIT_LOS",
+    "ICU_DAYS",
+    "NUM_CHRONIC_COND",
+    "ORDER_TOTAL_CHARGES",
+    "PATIENT_AGE",
+    "DRG_APR_SEVERITY",
+    "OPERATION_COUNT",
+    "NUM_VISITS",
+    "TOTAL_LOS",
+    "DOCTOR",
+    "DEPARTMENT",
+    "DISCHARGED_TO",
+    "ORDER_SET_USED",
+    "GENDER",
+    "Patient location",
+    "RACE_CD",
+    "DIAGNOSIS_ICD_GROUP",
+    "ICD9_TARGET",
+    "DRG_APR_CODE",
+    "DIAGNOSIS_ICD_CODE",
+    "PROCEDURE_ICD_CODE",
+    "DX_CODE"
+  ],
+  "csiro_target": "30-day observed all-cause readmission; negative labels use unverified last-contact proxy",
+  "historical_target": "source readmitted; horizon and planned/unplanned criteria unknown",
+  "pooling": false,
+  "prediction_time": "discharge",
+  "csiro_los_at_least_365_days": 236,
+  "warning": "Exploratory LOS retained without clinical exclusion. Target, features and split units differ across datasets."
+}

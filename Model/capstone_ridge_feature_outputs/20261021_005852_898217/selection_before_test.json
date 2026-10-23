@@ -1,0 +1,42 @@
+{
+  "selected": "+ All three",
+  "criterion": "Validation MAE",
+  "alpha": 1.0,
+  "results": [
+    {
+      "Experiment": "Common only",
+      "MAE_days": 4.658331860023326,
+      "RMSE_days": 6.9039669294995765,
+      "R2": 0.0728209414776867,
+      "negative_predictions": 0
+    },
+    {
+      "Experiment": "+ Comorbidity",
+      "MAE_days": 3.6133784327340686,
+      "RMSE_days": 5.127054436519952,
+      "R2": 0.48866906682073774,
+      "negative_predictions": 14
+    },
+    {
+      "Experiment": "+ Monitoring",
+      "MAE_days": 3.4678576250995223,
+      "RMSE_days": 4.92681000686966,
+      "R2": 0.5278305992942055,
+      "negative_predictions": 18
+    },
+    {
+      "Experiment": "+ Care team",
+      "MAE_days": 3.7648797160714333,
+      "RMSE_days": 5.3656490059011,
+      "R2": 0.43997072629587786,
+      "negative_predictions": 19
+    },
+    {
+      "Experiment": "+ All three",
+      "MAE_days": 3.3721367687620485,
+      "RMSE_days": 4.771900733998743,
+      "R2": 0.5570558086880186,
+      "negative_predictions": 40
+    }
+  ]
+}

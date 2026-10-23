@@ -1,0 +1,89 @@
+{
+  "source": "EDA/READMIT_FE.xlsx",
+  "source_sha256": "f938de1bad9622c5f2d944748f4802b19ed42ce2b9e5a3c086f5a0245ad8035e",
+  "split_sha256": "7157d64da0d3f50085820d6c4995d54849f4b7716fbe5751fe947b0249fe40fb",
+  "features": [
+    "PATIENT_AGE",
+    "NUM_CHRONIC_COND",
+    "NUM_VISITS",
+    "DOCTOR",
+    "DEPARTMENT",
+    "GENDER",
+    "Patient location",
+    "RACE_CD",
+    "ICD9_TARGET",
+    "DIAGNOSIS_ICD_CODE"
+  ],
+  "derived_features": [
+    "LOG1P_VISITS",
+    "AGE_CENTRED_SQUARED",
+    "AGE_X_CHRONIC",
+    "ICD_FAMILY",
+    "CHRONIC_COUNT_BAND"
+  ],
+  "excluded_extras": [
+    "COMORBIDITY_INDEX",
+    "MONITORING_HOURS",
+    "CARE_TEAM_SIZE"
+  ],
+  "rows": {
+    "TRAIN": 2380,
+    "VALIDATION": 298,
+    "TEST": 298
+  },
+  "selected_model": "HistGB Regressor",
+  "parameters": {
+    "Linear Regression": {
+      "copy_X": true,
+      "fit_intercept": true,
+      "n_jobs": null,
+      "positive": false
+    },
+    "Ridge Regression": {
+      "alpha": 1,
+      "copy_X": true,
+      "fit_intercept": true,
+      "max_iter": null,
+      "positive": false,
+      "random_state": null,
+      "solver": "auto",
+      "tol": 0.0001
+    },
+    "HistGB Regressor": {
+      "categorical_features": null,
+      "early_stopping": false,
+      "interaction_cst": null,
+      "l2_regularization": 5,
+      "learning_rate": 0.05,
+      "loss": "absolute_error",
+      "max_bins": 255,
+      "max_depth": null,
+      "max_features": 1.0,
+      "max_iter": 180,
+      "max_leaf_nodes": 7,
+      "min_samples_leaf": 20,
+      "monotonic_cst": null,
+      "n_iter_no_change": 10,
+      "quantile": null,
+      "random_state": 42,
+      "scoring": "loss",
+      "tol": 1e-07,
+      "validation_fraction": 0.1,
+      "verbose": 0,
+      "warm_start": false
+    }
+  },
+  "versions": {
+    "python": "3.10.13",
+    "sklearn": "1.5.2",
+    "numpy": "1.26.4",
+    "pandas": "2.2.3"
+  },
+  "limitations": [
+    "Previously used test partition",
+    "Synthetic/profile data",
+    "Not an admission-time clinical validation",
+    "Fixed configurations; no search"
+  ],
+  "model_loading": "Keep Model/los_ridge_export on sys.path for los_features.prepare."
+}

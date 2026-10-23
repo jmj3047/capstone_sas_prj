@@ -1,0 +1,89 @@
+{
+  "alpha": 1.0,
+  "solver": "lsqr",
+  "solver_tolerance": 1e-08,
+  "source_validation_scope": "capstone",
+  "numeric": [
+    "PATIENT_AGE",
+    "NUM_CHRONIC_COND",
+    "NUM_VISITS",
+    "LOG1P_VISITS",
+    "AGE_CENTRED_SQUARED",
+    "AGE_X_CHRONIC"
+  ],
+  "categorical": [
+    "DEPARTMENT",
+    "GENDER",
+    "RACE_CD",
+    "ICD9_TARGET",
+    "DIAGNOSIS_ICD_CODE",
+    "ICD_FAMILY",
+    "CHRONIC_BAND"
+  ],
+  "feature_sets": {
+    "Common only": [],
+    "+ Comorbidity": [
+      "COMORBIDITY_INDEX"
+    ],
+    "+ Monitoring": [
+      "MONITORING_HOURS"
+    ],
+    "+ Care team": [
+      "CARE_TEAM_SIZE"
+    ],
+    "+ All three": [
+      "COMORBIDITY_INDEX",
+      "MONITORING_HOURS",
+      "CARE_TEAM_SIZE"
+    ]
+  },
+  "selected_by_validation": "+ All three",
+  "rows": {
+    "Train": 80034,
+    "Validation": 10006,
+    "Test": 9960
+  },
+  "preprocessing_directory": "/Users/jmj3047/Library/CloudStorage/GoogleDrive-kathy.minjee.jang@gmail.com/\u1102\u1162 \u1103\u1173\u1105\u1161\u110b\u1175\u1107\u1173/2026/\u1112\u1161\u1107\u1161\u11ab\u1100\u1175/UC/11522_Technology Capstone Research Project PG/Model/external_los_preprocessing_outputs/20261014_224830_037913",
+  "baseline_manifest": {
+    "preprocessing_run": "/Users/jmj3047/Library/CloudStorage/GoogleDrive-kathy.minjee.jang@gmail.com/\u1102\u1162 \u1103\u1173\u1105\u1161\u110b\u1175\u1107\u1173/2026/\u1112\u1161\u1107\u1161\u11ab\u1100\u1175/UC/11522_Technology Capstone Research Project PG/Model/external_los_preprocessing_outputs/20261014_224830_037913",
+    "data_sha256": "f6dc715a3625f869768e0d04396a0126110f747f9eb57eb9ef72e086d74be1f3",
+    "metadata_sha256": "ffda6cd3f503e6de2faf6f8714df9d386092ed85ac97a4540ae29dc5403aad34",
+    "seed": 42,
+    "run_cv": true,
+    "cv_folds": 5,
+    "derived_features": true,
+    "selected_models": {
+      "Historical baseline": "Train median",
+      "External-only": "Train median",
+      "Combined": "Train median"
+    },
+    "selection_metric": "Common validation MAE",
+    "test_population": "Held-out Historical and CAPSTONE TRAIN rows",
+    "models": {
+      "Ridge regression": {
+        "alpha": 10
+      },
+      "Gradient boosting": {
+        "n_estimators": 100,
+        "learning_rate": 0.05,
+        "max_depth": 3,
+        "min_samples_leaf": 10
+      }
+    }
+  },
+  "feature_helper_sha256": "9948c1067cad59a0f0bc9ba55075db679d907ccc5e0bd5313c3171fdb8033616",
+  "loader_sha256": "0bd4b33213d8ea604e3cba5cb16cff8b7642b1673dd50df28ddcdd15bacdf8bb",
+  "hgb_results_sha256": "9044208bf53df80495547e679128726da4ed587c83fe66c710a02eb832dac09e",
+  "versions": {
+    "python": "3.10.13",
+    "sklearn": "1.5.2",
+    "numpy": "1.26.4",
+    "pandas": "2.2.3"
+  },
+  "limitations": [
+    "Previously used test set",
+    "Extra-feature timing/provenance unconfirmed",
+    "TOTAL_LOS is defined as ADMIT_LOS + ICU_DAYS; clinical meaning unconfirmed"
+  ],
+  "reload_instructions": "Add project Model folder to sys.path for los_mae_optimisation.add_features"
+}

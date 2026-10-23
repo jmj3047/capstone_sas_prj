@@ -1,0 +1,282 @@
+{
+  "snapshot_date": "2026-10-23",
+  "files": [
+    {
+      "path": "README.md",
+      "source": "Deliverable/report_foundation/README_EN.md",
+      "bytes": 5660,
+      "sha256": "dc0e6772a6076346e51f8f27f54b4975afc868c90f39c6552b41ab6358639d07"
+    },
+    {
+      "path": "docs/architecture.md",
+      "source": "Deliverable/report_foundation/architecture.md",
+      "bytes": 3749,
+      "sha256": "892e5962b03406032a82e746a8b81c81b9309c341fa99bc13e5261516dd8d2ea"
+    },
+    {
+      "path": "docs/deployment_and_test_checklist.md",
+      "source": "Deliverable/report_foundation/deployment_and_test_checklist.md",
+      "bytes": 2210,
+      "sha256": "6b4bf9a03febef5727e9f789f9325274ca730206aa7cd47e7b1c10269e53ab17"
+    },
+    {
+      "path": "docs/report_evidence.md",
+      "source": "Deliverable/report_foundation/report_evidence.md",
+      "bytes": 3107,
+      "sha256": "e69ba15db067954ca7e8a5b6f23f44301ac28b7d84e6fc7b6ca81cc5523c4071"
+    },
+    {
+      "path": "docs/research_inputs.md",
+      "source": "Deliverable/report_foundation/research_inputs.md",
+      "bytes": 2044,
+      "sha256": "07277f05801838fa4ac4f8d7240a399623f41429ef1f4bc6712a649c25885255"
+    },
+    {
+      "path": "Deliverable/Final_Dashboard.sasreportpkg.zip",
+      "source": "Dashboard/Final Dashboard.sasreportpkg.zip",
+      "bytes": 725344,
+      "sha256": "992297f8cae457b173b95f67c927467bcd9811f18e9ff0be792e486f6e6b5328"
+    },
+    {
+      "path": "Model/sas_readmission_live/Patient_Discharge_Workspace_Blue.html",
+      "source": "Model/sas_readmission_live/Patient_Discharge_Workspace_Blue.html",
+      "bytes": 76435,
+      "sha256": "999465bd298c51c5596981df6d664b4ef1395add32f75ae2e3ba6659a9c16ff2"
+    },
+    {
+      "path": "Model/sas_readmission_live/Patient_Discharge_API_Taylor_Scenario.sas",
+      "source": "Model/sas_readmission_live/Patient_Discharge_API_Taylor_Scenario.sas",
+      "bytes": 17596,
+      "sha256": "a7318afc8374a8a0739ef5d50013dba37e67a1af34bc962399f96f31e7464647"
+    },
+    {
+      "path": "Model/sas_readmission_live/Discharge_Education_Evidence_EN.md",
+      "source": "Model/sas_readmission_live/Discharge_Education_Evidence_EN.md",
+      "bytes": 6565,
+      "sha256": "aa7aa504b1580dbf93e3842b73a0fcf1df6d0781553f5b3c76f8982675237817"
+    },
+    {
+      "path": "Model/CAPSTONE_LOS_Ridge_Feature_Comparison.ipynb",
+      "source": "Model/CAPSTONE_LOS_Ridge_Feature_Comparison.ipynb",
+      "bytes": 108885,
+      "sha256": "69e007b12ee327a1b81c78ac97a0a6f0305ed44475e68f92e3d7e2bd220b679d"
+    },
+    {
+      "path": "Model/LOS_Historical_Linear_Ridge_HistGB.ipynb",
+      "source": "Model/LOS_Historical_Linear_Ridge_HistGB.ipynb",
+      "bytes": 78505,
+      "sha256": "1ac3e2affa8f0cb1a1ff285f86c71b3406125b655c64f32e4fc58689e6698d1a"
+    },
+    {
+      "path": "Model/los_ridge_export/los_features.py",
+      "source": "Model/los_ridge_export/los_features.py",
+      "bytes": 1350,
+      "sha256": "ace78a63fdb040a1b9af78c58232d8e526803bcdddcae852ddf4c1198346dc13"
+    },
+    {
+      "path": "Model/los_ridge_export/model_manifest.json",
+      "source": "Model/los_ridge_export/model_manifest.json",
+      "bytes": 1793,
+      "sha256": "f3dcc6f87f18d3560506ce2d30cd4aac771df48d2798cab5ea9a9b4906b943de"
+    },
+    {
+      "path": "Model/los_ridge_export/split_assignments.csv",
+      "source": "Model/los_ridge_export/split_assignments.csv",
+      "bytes": 32843,
+      "sha256": "7157d64da0d3f50085820d6c4995d54849f4b7716fbe5751fe947b0249fe40fb"
+    },
+    {
+      "path": "Model/los_mae_optimisation.py",
+      "source": "Model/los_mae_optimisation.py",
+      "bytes": 12524,
+      "sha256": "9948c1067cad59a0f0bc9ba55075db679d907ccc5e0bd5313c3171fdb8033616"
+    },
+    {
+      "path": "Model/los_advanced_fe_models.py",
+      "source": "Model/los_advanced_fe_models.py",
+      "bytes": 15885,
+      "sha256": "581d9d823b12b4b4b122ea87bdb0e9c5798a0237960d106a22e32c75af4546f8"
+    },
+    {
+      "path": "Model/los_three_feature_evidence.py",
+      "source": "Model/los_three_feature_evidence.py",
+      "bytes": 8746,
+      "sha256": "0bd4b33213d8ea604e3cba5cb16cff8b7642b1673dd50df28ddcdd15bacdf8bb"
+    },
+    {
+      "path": "Model/external_los_preprocessing_outputs/20261014_224830_037913/preprocessing_manifest.json",
+      "source": "Model/external_los_preprocessing_outputs/20261014_224830_037913/preprocessing_manifest.json",
+      "bytes": 2162,
+      "sha256": "e9db7264158fb41d36e5d273a168a5dadd7d3d82078360c4f76931c79cb6887f"
+    },
+    {
+      "path": "Model/external_los_comparison_outputs/20261014_231637_044250/modelling_manifest.json",
+      "source": "Model/external_los_comparison_outputs/20261014_231637_044250/modelling_manifest.json",
+      "bytes": 991,
+      "sha256": "f374966a41e5a7f206c8c315cf96e8f6d65996ca2dfa042aada05902dc5d3ddc"
+    },
+    {
+      "path": "Model/external_los_comparison_outputs/20261014_231637_044250/three_experiment_test_comparison.csv",
+      "source": "Model/external_los_comparison_outputs/20261014_231637_044250/three_experiment_test_comparison.csv",
+      "bytes": 584,
+      "sha256": "a61f1fc615379130d5dbeefa33530ef770030aa725f5c33ec0d3996009f8385f"
+    },
+    {
+      "path": "Model/csiro_gb_diagnosis_dynamics.py",
+      "source": "Model/csiro_gb_diagnosis_dynamics.py",
+      "bytes": 8207,
+      "sha256": "e1cc4f4f3bc263d8dad3e90ccf40085f0df3ad8888ad8864948aa23907cc1e66"
+    },
+    {
+      "path": "Model/csiro_gb_feature_expansion.py",
+      "source": "Model/csiro_gb_feature_expansion.py",
+      "bytes": 21255,
+      "sha256": "d842472213df0be2b92b5a3a6fe897b7f35d9cdf05dbc4450c6b68cea0253bcb"
+    },
+    {
+      "path": "Model/csiro_gb_further_search.py",
+      "source": "Model/csiro_gb_further_search.py",
+      "bytes": 10237,
+      "sha256": "9659262284811f3de1e5c1eb4e579dc9548c363a7cb5ae7f1ba9d1394a8a3e1c"
+    },
+    {
+      "path": "Model/csiro_gb_further_uncertainty.py",
+      "source": "Model/csiro_gb_further_uncertainty.py",
+      "bytes": 2089,
+      "sha256": "146c6235e2eae131f00aa79b022a375730028df895713d6f2b733742a74f3609"
+    },
+    {
+      "path": "Model/csiro_patient_journey_features.py",
+      "source": "Model/csiro_patient_journey_features.py",
+      "bytes": 21159,
+      "sha256": "9858d7fa348d2fb397d4ee747382ad094925ad22e8a8de36453043acfe1a7843"
+    },
+    {
+      "path": "Model/csiro_readmission_models.py",
+      "source": "Model/csiro_readmission_models.py",
+      "bytes": 14519,
+      "sha256": "4d3b196062cfc04520847c16c2a7336d8c487eac42d055087d8fa6bb76d3776e"
+    },
+    {
+      "path": "Model/csiro_readmission_preparation.py",
+      "source": "Model/csiro_readmission_preparation.py",
+      "bytes": 14933,
+      "sha256": "74baab6f8d0315958b5c53f61665b6549e5704688cc5bbfdcec9b238dbbd94f3"
+    },
+    {
+      "path": "Model/los_three_feature_evidence_outputs/20261015_010113_208147/ablation.csv",
+      "source": "Model/los_three_feature_evidence_outputs/20261015_010113_208147/ablation.csv",
+      "bytes": 2661,
+      "sha256": "9044208bf53df80495547e679128726da4ed587c83fe66c710a02eb832dac09e"
+    },
+    {
+      "path": "Model/los_three_feature_evidence_outputs/20261015_010113_208147/availability_gate.csv",
+      "source": "Model/los_three_feature_evidence_outputs/20261015_010113_208147/availability_gate.csv",
+      "bytes": 322,
+      "sha256": "f2ff4eca80bd04f6c10a05188970a9f352c55d80e66cbb03a528629f21a59941"
+    },
+    {
+      "path": "Model/los_three_feature_evidence_outputs/20261015_010113_208147/leave_one_out.csv",
+      "source": "Model/los_three_feature_evidence_outputs/20261015_010113_208147/leave_one_out.csv",
+      "bytes": 465,
+      "sha256": "6a013ba1f314f8652e5482100e230928c6160e5521113cc036300391eb04cd76"
+    },
+    {
+      "path": "Model/los_three_feature_evidence_outputs/20261015_010113_208147/evidence_manifest.json",
+      "source": "Model/los_three_feature_evidence_outputs/20261015_010113_208147/evidence_manifest.json",
+      "bytes": 3023,
+      "sha256": "753a917a1436b6690ff6aed2f8b5e1968b3b045c47b57363bc1d6a914c482d44"
+    },
+    {
+      "path": "Model/capstone_ridge_feature_outputs/20261021_005852_898217/ridge_feature_comparison.csv",
+      "source": "Model/capstone_ridge_feature_outputs/20261021_005852_898217/ridge_feature_comparison.csv",
+      "bytes": 774,
+      "sha256": "8ce60b94a125be1911bed3bbdd3bfbdc722fb5cae5792b8af25e1cf01082ce93"
+    },
+    {
+      "path": "Model/capstone_ridge_feature_outputs/20261021_005852_898217/ridge_vs_histgb.csv",
+      "source": "Model/capstone_ridge_feature_outputs/20261021_005852_898217/ridge_vs_histgb.csv",
+      "bytes": 290,
+      "sha256": "adf86c799702acced46b45a5229c5f6daec457f6624ff0a40463ea50439b8da9"
+    },
+    {
+      "path": "Model/capstone_ridge_feature_outputs/20261021_005852_898217/manifest.json",
+      "source": "Model/capstone_ridge_feature_outputs/20261021_005852_898217/manifest.json",
+      "bytes": 2973,
+      "sha256": "7524c92a2665328b5f924eb569a8b4a201df42a097e4e7abb5769ad5c1e0199d"
+    },
+    {
+      "path": "Model/capstone_ridge_feature_outputs/20261021_005852_898217/selection_before_test.json",
+      "source": "Model/capstone_ridge_feature_outputs/20261021_005852_898217/selection_before_test.json",
+      "bytes": 1045,
+      "sha256": "1a308ac9c877797e7386464686f6a45c3baf8f506c229583f41fadea493d6744"
+    },
+    {
+      "path": "Model/los_historical_three_models_outputs/20261021_004722_584105/model_comparison.csv",
+      "source": "Model/los_historical_three_models_outputs/20261021_004722_584105/model_comparison.csv",
+      "bytes": 486,
+      "sha256": "d5337062e01d285f5c9e79c7384f5c2332d22799ecee3d70249a93e76a1cfa7c"
+    },
+    {
+      "path": "Model/los_historical_three_models_outputs/20261021_004722_584105/manifest.json",
+      "source": "Model/los_historical_three_models_outputs/20261021_004722_584105/manifest.json",
+      "bytes": 2143,
+      "sha256": "e6a0e1a66f56476e8a79689cd53d88a336f46f8eef1f89dc00f1ceb694ba04ee"
+    },
+    {
+      "path": "Model/los_historical_three_models_outputs/20261021_004722_584105/selection_before_test.json",
+      "source": "Model/los_historical_three_models_outputs/20261021_004722_584105/selection_before_test.json",
+      "bytes": 669,
+      "sha256": "6b85eacf2896d3f2a2a9d20674b6962630198dd076a0d023c222b7865b7dad89"
+    },
+    {
+      "path": "Model/csiro_patient_journey_model_outputs/20261015_104338/test_comparison.csv",
+      "source": "Model/csiro_patient_journey_model_outputs/20261015_104338/test_comparison.csv",
+      "bytes": 1000,
+      "sha256": "976bef5e2878d4fd811c8ba350043d3d7cb362a1facd527eb41337b6295f36c8"
+    },
+    {
+      "path": "Model/csiro_patient_journey_model_outputs/20261015_104338/run_configuration.json",
+      "source": "Model/csiro_patient_journey_model_outputs/20261015_104338/run_configuration.json",
+      "bytes": 3004,
+      "sha256": "e263154743d8ea23a19b8bd9c83c73015d07d5b53c0fb46c49eb57a446a505f5"
+    },
+    {
+      "path": "Model/csiro_patient_journey_model_outputs/20261015_104338/selection_before_test.json",
+      "source": "Model/csiro_patient_journey_model_outputs/20261015_104338/selection_before_test.json",
+      "bytes": 3566,
+      "sha256": "e2a84555641cfb9fdd64861cab7470048766d16baf0d83c5facd64755ece9722"
+    },
+    {
+      "path": "Model/csiro_patient_journey_model_outputs/20261015_104338/summary.json",
+      "source": "Model/csiro_patient_journey_model_outputs/20261015_104338/summary.json",
+      "bytes": 1413,
+      "sha256": "8fbfd7ab263b2afa33f9409c06c5b321d6528a410fd02f522095ae213990ca3c"
+    },
+    {
+      "path": "Model/csiro_gb_dynamics_outputs/20261015_024436/test_comparison.csv",
+      "source": "Model/csiro_gb_dynamics_outputs/20261015_024436/test_comparison.csv",
+      "bytes": 995,
+      "sha256": "abe02a64cccfa0fde0de2b6878ad63fc607a63a65b5c6954ad334c73c325255e"
+    },
+    {
+      "path": "Model/csiro_gb_dynamics_outputs/20261015_024436/summary.json",
+      "source": "Model/csiro_gb_dynamics_outputs/20261015_024436/summary.json",
+      "bytes": 457,
+      "sha256": "2736b7047deddd70cf023f9ff7cd660191f0f03d6d389405aaa569bc51672407"
+    },
+    {
+      "path": "Model/csiro_readmission_model_outputs/20261015_014411/manifest.json",
+      "source": "Model/csiro_readmission_model_outputs/20261015_014411/manifest.json",
+      "bytes": 1562,
+      "sha256": "cb62c1afa254f2b20152c1b294d320e259b66412c013cf83678a2c22694ec539"
+    },
+    {
+      "path": "Model/csiro_readmission_model_outputs/20261015_014411/csiro_test_metrics.csv",
+      "source": "Model/csiro_readmission_model_outputs/20261015_014411/csiro_test_metrics.csv",
+      "bytes": 2561,
+      "sha256": "4908470faeef4864956eac96b3a69580531791c7321b2369c433455338360e8b"
+    }
+  ],
+  "package_status": "Prepared locally; no remote upload or SAS deployment performed by this builder"
+}

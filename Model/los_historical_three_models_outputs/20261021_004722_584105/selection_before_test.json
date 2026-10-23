@@ -1,0 +1,27 @@
+{
+  "selected_model": "HistGB Regressor",
+  "criterion": "Validation MAE",
+  "validation": [
+    {
+      "Model": "HistGB Regressor",
+      "MAE_days": 4.974513301831107,
+      "RMSE_days": 8.321092989334714,
+      "R2": -0.04118047489038301,
+      "Negative_predictions": 0
+    },
+    {
+      "Model": "Ridge Regression",
+      "MAE_days": 5.065881115314048,
+      "RMSE_days": 7.641973439910362,
+      "R2": 0.12183461881019952,
+      "Negative_predictions": 1
+    },
+    {
+      "Model": "Linear Regression",
+      "MAE_days": 275046475.53942955,
+      "RMSE_days": 4027416137.7928195,
+      "R2": -2.4390363703814618e+17,
+      "Negative_predictions": 5
+    }
+  ]
+}

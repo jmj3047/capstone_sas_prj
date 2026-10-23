@@ -1,0 +1,432 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Patient discharge workspace</title>
+<style>
+:root{--ink:#183c49;--muted:#587180;--teal:#07818b;--line:#d8e4e8;--orange:#ae5708;--blue:#2467ae}
+*{box-sizing:border-box}body{margin:0;background:#f1f6f7;color:var(--ink);font:14px/1.5 Arial,sans-serif}main{max-width:1500px;margin:auto;padding:28px}h1{font-size:29px;letter-spacing:-1px;margin:6px 0}h2{font-size:19px;margin:0 0 12px}h3{font-size:14px;margin:0}p{margin:7px 0}.eyebrow{font-size:11px;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;color:var(--teal)}.muted,small{color:var(--muted)}small{font-size:12px}.top{display:flex;justify-content:space-between;gap:22px;align-items:start}.staff{display:grid;grid-template-columns:1fr 1fr;gap:10px;max-width:540px}.staff small{grid-column:1/-1}label{display:flex;flex-direction:column;gap:5px;font-size:12px;color:var(--muted);min-width:0}input,select,button{font:inherit}input,select{padding:10px;background:white;border:1px solid #b9cdd4;border-radius:7px;min-width:0;width:100%;color:var(--ink)}select:disabled{background:#edf2f4;color:var(--muted)}button{border:0;background:var(--ink);color:white;border-radius:7px;padding:11px 17px;cursor:pointer;font-weight:700}button.secondary{background:white;color:var(--ink);border:1px solid #b9cdd4}button:disabled{opacity:.5;cursor:default}button:hover:not(:disabled){filter:brightness(.93)}:focus-visible{outline:3px solid #42aabf;outline-offset:2px}.notice{margin:20px 0;padding:13px 16px;background:white;border:1px solid var(--line);border-left:4px solid var(--teal);border-radius:6px}.notice.error{border-left-color:var(--orange);background:#fff9f1}.search{display:grid;grid-template-columns:240px auto 1fr;gap:12px;align-items:end;margin-bottom:17px}.panel{background:white;border:1px solid var(--line);border-radius:13px;padding:23px;min-width:0}.layout{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(300px,1fr);gap:18px}.bottom{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px}.profile-header{display:flex;justify-content:space-between;gap:16px;border-bottom:1px solid var(--line);padding-bottom:17px;margin-bottom:17px}.patient-name{font-size:24px;font-weight:700}.pill{display:inline-block;border:1px solid var(--line);border-radius:20px;padding:6px 11px;font-size:12px;background:#f8fbfc}.fields{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.wide{grid-column:span 2}.recorded{display:grid;grid-template-columns:1fr 1fr;gap:12px;border-top:1px solid var(--line);padding-top:17px;margin-top:20px}.recorded strong{display:block;font-size:23px}.recorded .unit{font-size:12px;font-weight:400}.advanced{margin-top:19px;border-top:1px solid var(--line);padding-top:13px}summary{cursor:pointer;color:var(--teal);font-weight:700}.advanced .fields{margin-top:15px}.risk{border-top:4px solid #80919a;background:#f9fbfc;align-self:start}.risk.priority{border-top-color:var(--orange);background:#fffaf3}.risk.standard{border-top-color:var(--blue);background:#f6faff}.badge{display:inline-block;border:1px solid currentColor;border-radius:5px;padding:5px 9px;font-size:12px;font-weight:700}.priority .badge,.priority .score{color:var(--orange)}.standard .badge,.standard .score{color:var(--blue)}.score{font-size:64px;font-weight:750;line-height:1.1;letter-spacing:-3px;margin-top:20px}.track{height:12px;background:#e0eaee;border-radius:8px;position:relative;margin-top:20px}.fill{height:100%;border-radius:8px;background:var(--blue);width:0}.priority .fill{background:var(--orange)}.threshold{position:absolute;top:-4px;left:13%;height:20px;width:2px;background:var(--ink)}.scale{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-top:8px}.predict{width:100%;margin:20px 0 8px;background:var(--teal)}.risk-explanation{border-top:1px solid var(--line);margin-top:18px;padding-top:14px}.note{padding:11px;background:#f1f6f7;border-radius:6px;font-size:12px;margin-top:12px}.step{border-top:1px solid var(--line);padding:15px 0}.step:first-child{border-top:0}.step small{display:block;margin-top:6px}.resource{margin:17px 0}.resource .value{font-size:30px;font-weight:700}.resource-bar{height:9px;border-radius:7px;background:#e7f0f2;margin-top:8px}.resource-bar span{height:100%;display:block;background:var(--teal);border-radius:7px}.resource-caption{font-size:12px;color:var(--muted)}footer{font-size:11px;color:var(--muted);margin-top:20px;line-height:1.7}a{color:var(--teal)}[hidden]{display:none!important}.invalid{border-color:#b85b19;background:#fff9f1}#meta{overflow-wrap:anywhere}.empty{padding:40px;text-align:center;background:white;border:1px dashed #bacdd3;border-radius:12px}
+@media(max-width:1000px){.top{flex-direction:column}.staff{max-width:none;width:100%}.fields{grid-template-columns:repeat(2,minmax(0,1fr))}.layout{grid-template-columns:minmax(0,1.4fr) minmax(270px,1fr)}}
+@media(max-width:720px){main{padding:15px}.layout,.bottom{grid-template-columns:1fr}.search{grid-template-columns:1fr auto}.search label:last-child{grid-column:1/-1}.staff{grid-template-columns:1fr}.staff small{grid-column:auto}.fields{grid-template-columns:1fr 1fr}.panel{padding:17px}.score{font-size:56px}}
+.recorded-field{background:#f3f7f9;white-space:normal;overflow-wrap:anywhere;padding:10px;border:1px solid var(--line);border-radius:7px;color:var(--ink);min-height:41px}.check-label{display:flex;flex-direction:row;align-items:flex-start;gap:12px;color:var(--ink);font-size:14px;cursor:pointer}.check-label input{width:20px;height:20px;flex:0 0 20px;accent-color:var(--teal);margin:2px 0}.check-title{font-weight:700}.step.done .check-title{text-decoration:line-through;color:var(--muted)}.step.done{background:#f6faf8}.check-body{margin-left:32px}.check-meta{color:var(--teal);font-size:12px}.check-progress{font-weight:700;color:var(--teal);margin:12px 0}
+
+/* Blue presentation theme — visual changes only. */
+:root{--ink:#123e69;--muted:#44698c;--teal:#058ca8;--line:#c9dfee;--blue:#2469aa;--orange:#c74904}
+body{background:#e0f0ff;font-size:16px;color:var(--ink)}
+main{max-width:1500px;padding:28px;position:relative;isolation:isolate}
+.top{position:relative;color:white;min-height:115px;gap:30px}
+.top:before{content:'';position:absolute;z-index:-1;background:#2465a1;left:-28px;right:-28px;top:-28px;bottom:-90px}
+.top h1{font-size:36px;letter-spacing:-.8px;margin:7px 0}
+.top .eyebrow{color:#9de9fa;font-size:13px}
+.top p,.top label{color:#eff8ff}.top p{font-size:17px}
+.staff{max-width:620px;width:43%;gap:16px}.staff label{font-size:14px}
+.staff select{font-size:16px;background:#f2f8fd;color:#16456e}
+.notice{background:#ecf7ff;border-left-color:#32c5e8;margin-top:22px;position:relative;font-size:15px}
+.notice.error{background:#fff4e6;border-left-color:var(--orange)}
+.search{margin-top:18px;grid-template-columns:290px auto 1fr;gap:14px}.search label{font-size:15px}
+button{background:#12558a;font-size:16px}.secondary,button.secondary{border-color:#7aaad2;color:#174879}
+.panel{border-color:#c9e0f3;background:#fff;box-shadow:0 2px 6px #164d7b08;padding:24px;border-radius:11px}
+.patient-panel,.resource-panel{padding-top:61px;position:relative;overflow:hidden}
+.patient-panel>.profile-header>div:first-child>.eyebrow,.resource-panel>.eyebrow{position:absolute;top:0;left:0;right:0;background:#2469aa;color:white;padding:11px 24px;font-size:14px;letter-spacing:1.7px}
+.profile-header{padding-bottom:18px;margin-bottom:18px;gap:10px}
+.patient-name{font-size:34px;line-height:1.2;margin-bottom:12px;font-weight:750}
+#patient-id{font-size:20px;line-height:1.5}#encounter-id{font-size:17px;line-height:1.5}
+#saved-info{font-size:16px}.pill{background:#d5edff;color:#16456e;font-size:14px;font-weight:700}
+.fields{gap:16px 14px}.patient-panel #fields>label,.patient-panel #fields>div>small{font-size:16px;line-height:1.4;color:#355e82}
+.patient-panel input,.patient-panel select{font-size:18px;min-height:47px;background:#f3f8fc}
+.patient-panel .recorded-field{font-size:18px;line-height:1.45;min-height:47px;background:#edf5fb}
+.patient-panel select:disabled{color:#355e82;opacity:1;background:#eef5fb}
+.recorded{margin-top:20px}.recorded small{font-size:15px}.recorded strong{font-size:29px}
+.advanced{font-size:15px}.advanced .fields{font-size:14px}
+.risk{background:#f5faff;border-top-color:#7b94a9;padding:27px 24px}
+.risk.priority{background:#fff8ed;border-top-color:#d45108}.risk.standard{background:#f4f9ff}
+.score{font-size:76px;margin-top:20px;letter-spacing:-3px}.badge{font-size:15px;padding:7px 11px}
+.risk .muted{font-size:17px}.risk .scale{font-size:14px}.risk-explanation{font-size:17px;line-height:1.5}
+.risk #meta{font-size:13px;overflow-wrap:anywhere}.note{background:#eaf5ff;font-size:14px;line-height:1.5}
+.resource-panel h2{font-size:26px;line-height:1.25;margin-bottom:12px}
+.resource-panel p,.resource-panel #resource-summary{font-size:16px;line-height:1.5}
+.resource-panel .resource h3{font-size:18px}.resource-panel .resource .value{font-size:36px;font-weight:750;line-height:1.3;color:#123e69}
+.resource-panel .resource-caption{font-size:15px}.resource-panel .resource-bar{height:13px;background:#dceaf4}
+.resource-panel .resource-bar span{background:#068eab}.resource-panel .note{font-size:14px}
+.education-panel{max-width:100%}
+.education-panel h2{font-size:23px}.check-label{font-size:17px}.check-title{font-size:17px}
+footer{font-size:12px;margin-top:22px}
+@media(max-width:1450px){.staff{width:46%}.patient-name{font-size:32px}.top h1{font-size:32px}}
+@media(max-width:1000px){.top{flex-direction:column}.staff{width:100%;max-width:none}.top:before{bottom:-90px}.top p{font-size:16px}}
+@media(max-width:720px){main{padding:20px 16px}.top:before{left:-16px;right:-16px;top:-20px;bottom:-115px}.staff{grid-template-columns:1fr}.search{grid-template-columns:minmax(0,1fr) auto}.search label:last-child{grid-column:auto}.search>div{grid-column:1/-1}.fields{grid-template-columns:repeat(2,minmax(0,1fr))}.patient-panel #fields>label,.patient-panel #fields>div>small{font-size:15px}.patient-panel input,.patient-panel select,.patient-panel .recorded-field{font-size:16px}.patient-name{font-size:30px}.panel{padding:20px 17px}.patient-panel,.resource-panel{padding-top:60px}.patient-panel>.profile-header>div:first-child>.eyebrow,.resource-panel>.eyebrow{padding-left:17px}.resource-panel #resources{grid-template-columns:1fr;gap:0}.profile-header{flex-wrap:wrap}#patient-id{font-size:18px}.score{font-size:68px}}
+
+</style>
+</head>
+<body>
+<main>
+<header class="top"><div><div class="eyebrow">Patient care / discharge planning</div><h1>Patient discharge review</h1><p class="muted">Review the patient, adjust the inputs and run the SAS readmission model.</p></div>
+<div class="staff"><label>Doctor · ID and display name<select id="doctor" disabled></select></label><label>Discharge nurse · ID and display name<select id="nurse" disabled></select></label></div></header>
+<div id="status" class="notice" role="status">Connecting to the SAS patient lookup…</div>
+<form id="search-form" class="search"><label>Patient number<input id="patient-query" inputmode="numeric" placeholder="Enter an exact patient number"></label><button id="find" type="submit">Find patient</button><div><button id="back-list" class="secondary" type="button" hidden>Back to patient list</button></div><select id="patient-picker" hidden aria-label="Selected patient / admission"><option value="">Select a patient</option></select></form>
+<section id="patient-list" class="panel" hidden><h2>Choose a patient</h2><p class="muted">Up to 25 admissions are listed. Search an exact patient number to look up any patient in the full SAS source.</p><div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;min-width:780px"><thead style="background:#f3f7f9;text-align:left"><tr><th>Patient number</th><th>Name</th><th>Age</th><th>Department</th><th>Readmission probability</th><th>Discharge status</th><th>Action</th></tr></thead><tbody id="patient-rows"></tbody></table></div><p id="list-note" class="muted"></p><small>Discharged opens the last completed record in this workspace. Records are kept in this browser tab, including refreshes.</small></section>
+<div id="empty" class="empty"><h2>Select a patient to begin</h2><p>Search by patient number, or select one of the example records returned by SAS.</p><small>For repeat admissions, choose the admission under the patient number.</small></div>
+<div id="workspace" hidden>
+<div class="layout">
+<section class="panel patient-panel"><div class="profile-header"><div><div class="eyebrow">Selected patient</div><div id="patient-name" class="patient-name"></div><div id="patient-id"></div><small id="encounter-id"></small><p id="saved-info" class="muted" hidden></p></div><div><span id="admission-state" class="pill">At discharge</span></div></div>
+<div id="fields" class="fields"></div>
+<div class="recorded"><div><small>This admission · recorded care team</small><strong id="recorded-team">—</strong></div><div><small>This admission · recorded monitoring</small><strong id="recorded-hours">—</strong></div></div>
+<details id="advanced" class="advanced"><summary>Additional model inputs · automatically filled where available</summary><p class="muted">The existing model needs these values too. Complete any missing values before prediction.</p><div id="extra-fields" class="fields"></div><p id="mapping-note" class="note"></p></details>
+</section>
+<section id="risk" class="panel risk" aria-live="polite"><span id="review-badge" class="badge">Prediction not run</span><div id="probability" class="score">—</div><p class="muted">Readmission probability</p><div id="meter" hidden><div class="track"><div id="fill" class="fill"></div><div class="threshold"></div></div><div class="scale"><span>0%</span><span>Existing rule: 13%</span><span>100%</span></div></div><button id="predict" class="predict">Predict readmission</button><button id="reset" class="secondary" style="width:100%">Restore recorded inputs</button><button id="edit-discharge" class="secondary" style="width:100%;margin-top:20px" hidden>Edit and discharge again</button><p id="prediction-note" class="risk-explanation">Run the model for the current patient inputs.</p><p id="meta" class="muted small"></p><div class="note">13% is the existing model review threshold. Prediction horizon and performance on this cohort remain unconfirmed.</div></section>
+</div>
+<div class="bottom">
+<section class="panel education-panel"><div class="eyebrow">Next review steps</div><h2>Discharge education checklist</h2><p class="muted">Tick after explaining each topic. Expand for suggested wording and sources.</p><div id="check-progress" class="check-progress" role="status"></div><div id="prompts"></div><small>Checklist status is captured when a successful prediction completes the discharge in this workspace.</small></section>
+<section class="panel resource-panel"><div class="eyebrow">If another admission occurs</div><h2>Resource reference scenario</h2><p class="muted">Typical resource use in similar recorded admissions.</p><div id="resource-summary"></div><div id="resources"></div><p class="note">Historical comparison, conditional on a similar admission. These data do not identify resource use during actual return admissions. Values are not staffing orders or model predictions.</p></section>
+</div>
+</div>
+<footer>Existing SAS Gradient Boosting model · Edited values are scored on the SAS server.<br>Prompt references: <a href="https://www.nhlbi.nih.gov/health/heart-failure/living-with" target="_blank" rel="noopener">NHLBI heart failure</a> · <a href="https://www.nhlbi.nih.gov/health/pneumonia/recovery" target="_blank" rel="noopener">NHLBI pneumonia</a> · <a href="https://www.nhlbi.nih.gov/health/heart-attack/recovery" target="_blank" rel="noopener">NHLBI after a heart attack</a> · <a href="https://www.nhlbi.nih.gov/health/copd/living-with" target="_blank" rel="noopener">NHLBI COPD</a>.<details><summary>Connection details</summary><p id="connection"></p><p id="reference-version"></p></details></footer>
+</main>
+<input type="hidden" id="program" value="$PROGRAM$"><input type="hidden" id="csrf" value="$CSRF$">
+<script id="reference-data" type="application/json">{"version":"ab623a470b11f358","maps":{"DEPARTMENT":{"HEART":3.0,"TRANSPLANT":8.0,"PULMONARY":7.0,"ONCOLOGY":5.0,"UNKNOWN":0.0,"GENERAL MED":1.0,"WOMENS":9.0,"PSYCH":6.0,"GENERAL SURG":2.0,"NEUROSCIENCES":4.0},"DOCTOR":{"275709":38.0,"284130":49.0,"287656":50.0,"319038":87.0,"235415":15.0,"306822":76.0,"262051":27.0,"292909":54.0,"312991":81.0,"202927":2.0,"220194":8.0,"261991":26.0,"256444":21.0,"208572":4.0,"231796":13.0,"283122":48.0,"292728":53.0,"297202":62.0,"297002":57.0,"321092":88.0,"297501":63.0,"311472":79.0,"319034":86.0,"300214":66.0,"296744":56.0,"277860":42.0,"328226":92.0,"329391":93.0,"216074":6.0,"234813":14.0,"226751":11.0,"249258":20.0,"297089":61.0,"283030":47.0,"237257":16.0,"310984":78.0,"317282":85.0,"281370":45.0,"279187":43.0,"322861":89.0,"303742":72.0,"324306":91.0,"313983":82.0,"344581":98.0,"272913":32.0,"257865":25.0,"247678":19.0,"244862":17.0,"287674":51.0,"300171":65.0,"333041":96.0,"302999":67.0,"218284":7.0,"331678":95.0,"306742":75.0,"329775":94.0,"275703":37.0,"303221":69.0,"303334":71.0,"339158":97.0,"230123":12.0,"257856":24.0,"316841":83.0,"308227":77.0,"292722":52.0,"201620":1.0,"224566":10.0,"300048":64.0,"303229":70.0,"303044":68.0,"275906":39.0,"282923":46.0,"317133":84.0,"209685":5.0,"206646":3.0,"267981":28.0,"271713":30.0,"324082":90.0,"223996":9.0,"268058":29.0,"306693":74.0,"297048":59.0,"306573":73.0,"257549":22.0,"275557":35.0,"297066":60.0,"293595":55.0,"297046":58.0,"274741":33.0,"277855":41.0,"311772":80.0,"272191":31.0,"245283":18.0,"275412":34.0,"257565":23.0,"275660":36.0,"276404":40.0,"279341":44.0},"GENDER":{"M":0.0,"F":1.0},"DISCHARGED_TO":{"ROUTINE DSCHG, HOME":10.0,"HOME HEALTH AGENCY":3.0,"SKILLED NURSING FACIL":11.0,"HOSPICE (HOME)":5.0,"CHG TO LTAC":2.0,"OTHER DEATH":8.0,"AGNST MEDICAL ADVICE":1.0,"INTERMEDIATE CARE":6.0,"HOSPICE - MEDICAL INP":4.0,"OTHER ACUTE HOSP":7.0,"REHAB HOSPITAL":9.0},"RACE_CD":{"White":2.0,"Others":3.0,"Black":1.0},"DIAGNOSIS_ICD_GROUP":{"CHF":2.0,"AMI":1.0,"PNU":4.0,"COPD":3.0}},"locations":{"FL|Miami|Miami-Dade":44.0,"FL|Fort Lauderdale|Broward":45.0,"FL|Patrick Air Force Base|Brevard":84.0,"FL|West Palm Beach|Palm Beach":53.0,"FL|North Palm Beach|Palm Beach":54.0,"FL|Palm Beach Gardens|Palm Beach":46.0,"FL|Wellington|Palm Beach":85.0,"FL|Boca Raton|Palm Beach":87.0,"FL|Canal Point|Palm Beach":47.0,"FL|Delray Beach|Palm Beach":37.0,"FL|Deerfield Beach|Broward":49.0,"AL|Florence|Lauderdale":14.0,"FL|Bradenton|Manatee":106.0,"AL|Birmingham|Jefferson":15.0,"FL|Pahokee|Palm Beach":86.0,"TX|Houston|Harris":145.0,"FL|Hobe Sound|Martin":38.0,"FL|Lake Worth|Palm Beach":39.0,"GA|Norcross|Gwinnett":124.0,"GA|Suwanee|Gwinnett":123.0,"FL|Loxahatchee|Palm Beach":36.0,"FL|Clearwater|Pinellas":57.0,"FL|Boynton Beach|Palm Beach":50.0,"FL|Punta Gorda|Charlotte":55.0,"FL|Jupiter|Palm Beach":113.0,"FL|Lutz|Hillsborough":88.0,"FL|Tampa|Hillsborough":58.0,"FL|Haines City|Polk":56.0,"FL|Saint Petersburg|Pinellas":89.0,"FL|Port Charlotte|Charlotte":90.0,"FL|Naples|Collier":40.0,"FL|Bonita Springs|Lee":107.0,"FL|Sarasota|Sarasota":91.0,"FL|Spring Hill|Hernando":92.0,"FL|Largo|Pinellas":93.0,"FL|Hudson|Pasco":94.0,"FL|Palm Harbor|Pinellas":112.0,"FL|Tarpon Springs|Pinellas":95.0,"FL|Safety Harbor|Pinellas":59.0,"FL|Fruitland Park|Lake":41.0,"FL|Stuart|Martin":74.0,"FL|Gotha|Orange":60.0,"FL|Groveland|Lake":111.0,"FL|Howey in the Hills|Lake":96.0,"FL|Kissimmee|Osceola":61.0,"FL|Saint Cloud|Osceola":76.0,"FL|Leesburg|Lake":78.0,"FL|Fort Pierce|Saint Lucie":52.0,"FL|Port Saint Lucie|Saint Lucie":97.0,"AL|Bessemer|Jefferson":8.0,"AL|Chelsea|Shelby":33.0,"AL|Cleveland|Blount":22.0,"AL|Gardendale|Jefferson":23.0,"AL|Graysville|Jefferson":9.0,"AL|Kimberly|Jefferson":1.0,"AL|Locust Fork|Blount":4.0,"AL|Ragland|Saint Clair":17.0,"AL|Remlap|Blount":32.0,"AL|Sterrett|Shelby":18.0,"AL|Vincent|Shelby":34.0,"AL|Warrior|Jefferson":10.0,"AL|Harpersville|Shelby":24.0,"AL|Springville|Saint Clair":25.0,"AL|Birmingham|Shelby":26.0,"AL|Tuscaloosa|Tuscaloosa":5.0,"AL|Cottondale|Tuscaloosa":27.0,"AL|Ralph|Tuscaloosa":3.0,"AL|Courtland|Lawrence":11.0,"AL|Killen|Lauderdale":19.0,"AL|Rogersville|Lauderdale":20.0,"AL|Waterloo|Lauderdale":6.0,"AL|Gadsden|Etowah":12.0,"MS|Petal|Forrest":141.0,"AL|Deatsville|Elmore":28.0,"AL|Tallassee|Elmore":29.0,"AL|Montgomery|Montgomery":21.0,"AL|Gordon|Houston":30.0,"AL|Mobile|Mobile":13.0,"AL|Skipperville|Dale":31.0,"AL|Bon Secour|Baldwin":16.0,"AL|Spanish Fort|Baldwin":7.0,"AL|Seminole|Baldwin":2.0,"TN|Primm Springs|Williamson":143.0,"MS|Pascagoula|Jackson":142.0,"IL|Park Forest|Cook":137.0,"IL|Chicago|Cook":138.0,"IL|Peoria Heights|Peoria":139.0,"IL|Lexington|McLean":136.0,"MO|Gerald|Franklin":140.0,"AR|Natural Dam|Crawford":35.0,"TX|Ennis|Ellis":150.0,"TX|Dallas|Dallas":146.0,"TX|Longview|Gregg":147.0,"TX|Tyler|Smith":144.0,"TX|Grandview|Johnson":156.0,"TX|Haltom City|Tarrant":151.0,"TX|Denton|Denton":152.0,"TX|Jarrell|Williamson":155.0,"TX|Spring|Montgomery":153.0,"TX|High Island|Galveston":154.0,"TX|Victoria|Victoria":149.0,"TX|San Antonio|Bexar":148.0,"VA|Springfield|Fairfax":160.0,"VA|Alexandria|Alexandria City":164.0,"VA|Lignum|Culpeper":159.0,"GA|Union City|Fulton":120.0,"VA|Greenwood|Albemarle":157.0,"VA|Bremo Bluff|Fluvanna":161.0,"VA|Richmond|Richmond City":162.0,"VA|McKenney|Dinwiddie":158.0,"VA|Abingdon|Washington":163.0,"GA|Acworth|Cherokee":118.0,"GA|Decatur|DeKalb":119.0,"GA|Rydal|Bartow":125.0,"GA|Woodstock|Cherokee":121.0,"GA|Locust Grove|Henry":126.0,"GA|Palmetto|Fulton":127.0,"GA|Stockbridge|Henry":117.0,"GA|Ellenwood|DeKalb":128.0,"FL|Casselberry|Seminole":65.0,"GA|Riverdale|Clayton":129.0,"GA|Atlanta|Fulton":115.0,"GA|Athens|Clarke":133.0,"GA|Ringgold|Catoosa":135.0,"GA|Augusta|Richmond":132.0,"GA|Dry Branch|Twiggs":134.0,"GA|Richmond Hill|Bryan":122.0,"GA|Savannah|Chatham":114.0,"GA|Ellerslie|Harris":116.0,"GA|Pine Mountain|Harris":130.0,"GA|Shiloh|Harris":131.0,"FL|Saint Augustine|Saint Johns":108.0,"FL|Tallahassee|Leon":62.0,"FL|Astor|Lake":63.0,"FL|Daytona Beach|Volusia":81.0,"FL|Crestview|Okaloosa":109.0,"FL|Valparaiso|Okaloosa":98.0,"FL|Newberry|Alachua":80.0,"FL|Reddick|Marion":64.0,"FL|Winter Springs|Seminole":99.0,"FL|Apopka|Orange":82.0,"FL|Grand Island|Lake":77.0,"FL|Deltona|Volusia":79.0,"FL|Longwood|Seminole":66.0,"FL|Mount Dora|Lake":67.0,"FL|Oak Hill|Volusia":68.0,"FL|Oviedo|Seminole":100.0,"FL|Paisley|Lake":51.0,"FL|Titusville|Brevard":75.0,"FL|Orlando|Orange":42.0,"FL|Zellwood|Orange":69.0,"FL|Indialantic|Brevard":101.0,"FL|Palm Bay|Brevard":70.0,"FL|Cocoa|Brevard":110.0,"FL|Cocoa Beach|Brevard":102.0,"FL|Melbourne Beach|Brevard":103.0,"FL|Merritt Island|Brevard":83.0,"FL|Hialeah|Miami-Dade":71.0,"FL|Hollywood|Broward":72.0,"FL|Homestead|Miami-Dade":104.0,"FL|Pompano Beach|Broward":43.0,"FL|Miami Beach|Miami-Dade":48.0,"FL|Key Biscayne|Miami-Dade":105.0,"FL|North Miami Beach|Miami-Dade":73.0},"diagnoses":{"428.33":{"code":428.33,"group":"CHF","encodedGroup":2.0,"target":1.0,"dx":42833.0,"label":"ACUTE ON CHRONIC DIASTOLIC HEART FAILURE"},"428.23":{"code":428.23,"group":"CHF","encodedGroup":2.0,"target":1.0,"dx":42823.0,"label":"ACUTE ON CHRONIC SYSTOLIC HEART FAILURE"},"428":{"code":428.0,"group":"CHF","encodedGroup":2.0,"target":1.0,"dx":4280.0,"label":"CONGESTIVE HEART FAILURE UNSPECIFIED"},"410.71":{"code":410.71,"group":"AMI","encodedGroup":1.0,"target":1.0,"dx":41071.0,"label":"ACUTE MYOCARDIAL INFARCTION SUBENDOCARDIAL INFARCTION INITIAL EPISODE OF CARE"},"486":{"code":486.0,"group":"PNU","encodedGroup":4.0,"target":1.0,"dx":486.0,"label":"PNEUMONIA ORGANISM UNSPECIFIED"},"482.9":{"code":482.9,"group":"PNU","encodedGroup":4.0,"target":1.0,"dx":4829.0,"label":"BACTERIAL PNEUMONIA UNSPECIFIED"},"491.21":{"code":491.21,"group":"COPD","encodedGroup":3.0,"target":0.0,"dx":49121.0,"label":"OBSTRUCTIVE CHRONIC BRONCHITIS WITH ACUTE EXACERBATION"},"402.91":{"code":402.91,"group":"CHF","encodedGroup":2.0,"target":0.0,"dx":40291.0,"label":"HYPERTENSIVE HEART DISEASE UNSPECIFIED WITH HEART FAILURE"},"481":{"code":481.0,"group":"PNU","encodedGroup":4.0,"target":1.0,"dx":481.0,"label":"PNEUMOCOCCAL PNEUMONIA STREPTOCOCCUS PNEUMONIAE PNEUMONIA"},"428.22":{"code":428.22,"group":"CHF","encodedGroup":2.0,"target":1.0,"dx":42822.0,"label":"CHRONIC SYSTOLIC HEART FAILURE"},"493.22":{"code":493.22,"group":"COPD","encodedGroup":3.0,"target":0.0,"dx":49322.0,"label":"CHRONIC OBSTRUCTIVE ASTHMA WITH ACUTE EXACERBATION"},"480.1":{"code":480.1,"group":"PNU","encodedGroup":4.0,"target":1.0,"dx":4801.0,"label":"PNEUMONIA DUE TO RESPIRATORY SYNCYTIAL VIRUS"},"428.31":{"code":428.31,"group":"CHF","encodedGroup":2.0,"target":1.0,"dx":42831.0,"label":"ACUTE DIASTOLIC HEART FAILURE"},"416.8":{"code":416.8,"group":"CHF","encodedGroup":2.0,"target":0.0,"dx":4168.0,"label":"OTHER CHRONIC Hosp 46 HEART DISEASES"},"482.1":{"code":482.1,"group":"PNU","encodedGroup":4.0,"target":1.0,"dx":4821.0,"label":"PNEUMONIA DUE TO PSEUDOMONAS"},"428.21":{"code":428.21,"group":"CHF","encodedGroup":2.0,"target":1.0,"dx":42821.0,"label":"ACUTE SYSTOLIC HEART FAILURE"},"491.8":{"code":491.8,"group":"COPD","encodedGroup":3.0,"target":0.0,"dx":4918.0,"label":"OTHER CHRONIC BRONCHITIS"},"428.32":{"code":428.32,"group":"CHF","encodedGroup":2.0,"target":1.0,"dx":42832.0,"label":"CHRONIC DIASTOLIC HEART FAILURE"},"496":{"code":496.0,"group":"COPD","encodedGroup":3.0,"target":0.0,"dx":496.0,"label":"CHRONIC AIRWAY OBSTRUCTION NOT ELSEWHERE CLASSIFIED"},"428.41":{"code":428.41,"group":"CHF","encodedGroup":2.0,"target":1.0,"dx":42841.0,"label":"ACUTE COMBINED SYSTOLIC AND DIASTOLIC HEART FAILURE"},"428.3":{"code":428.3,"group":"CHF","encodedGroup":2.0,"target":1.0,"dx":42830.0,"label":"UNSPECIFIED DIASTOLIC HEART FAILURE"},"404.91":{"code":404.91,"group":"CHF","encodedGroup":2.0,"target":0.0,"dx":40491.0,"label":"HYPERTENSIVE HEART AND CHRONIC KIDNEY DISEASE UNSPECIFIED WITH HEART FAILURE AND WITH CHRONIC KIDNEY DISEASE STAGE I THROUGH STAGE IV OR UNSPECIFIED"},"491.2":{"code":491.2,"group":"COPD","encodedGroup":3.0,"target":0.0,"dx":49120.0,"label":"OBSTRUCTIVE CHRONIC BRONCHITIS WITHOUT EXACERBATION"},"492.8":{"code":492.8,"group":"COPD","encodedGroup":3.0,"target":0.0,"dx":4928.0,"label":"OTHER EMPHYSEMA"},"494":{"code":494.0,"group":"COPD","encodedGroup":3.0,"target":0.0,"dx":4940.0,"label":"BRONCHIECTASIS WITHOUT ACUTE EXACERBATION"},"428.43":{"code":428.43,"group":"CHF","encodedGroup":2.0,"target":1.0,"dx":42843.0,"label":"ACUTE ON CHRONIC COMBINED SYSTOLIC AND DIASTOLIC HEART FAILURE"},"404.01":{"code":404.01,"group":"CHF","encodedGroup":2.0,"target":0.0,"dx":40401.0,"label":"HYPERTENSIVE HEART AND CHRONIC KIDNEY DISEASE MALIGNANT WITH HEART FAILURE AND WITH CHRONIC KIDNEY DISEASE STAGE I THROUGH STAGE IV OR UNSPECIFIED"},"480.2":{"code":480.2,"group":"PNU","encodedGroup":4.0,"target":1.0,"dx":4802.0,"label":"PNEUMONIA DUE TO PARAINFLUENZA VIRUS"},"480.9":{"code":480.9,"group":"PNU","encodedGroup":4.0,"target":1.0,"dx":4809.0,"label":"VIRAL PNEUMONIA UNSPECIFIED"},"494.1":{"code":494.1,"group":"COPD","encodedGroup":3.0,"target":0.0,"dx":4941.0,"label":"BRONCHIECTASIS WITH ACUTE EXACERBATION"},"482.49":{"code":482.49,"group":"PNU","encodedGroup":4.0,"target":1.0,"dx":48249.0,"label":"OTHER STAPHYLOCOCCUS PNEUMONIA"},"491.22":{"code":491.22,"group":"COPD","encodedGroup":3.0,"target":0.0,"dx":49122.0,"label":"OBSTRUCTIVE CHRONIC BRONCHITIS WITH ACUTE BRONCHITIS"},"402.01":{"code":402.01,"group":"CHF","encodedGroup":2.0,"target":0.0,"dx":40201.0,"label":"HYPERTENSIVE HEART DISEASE MALIGNANT WITH HEART FAILURE"},"482.41":{"code":482.41,"group":"PNU","encodedGroup":4.0,"target":1.0,"dx":48241.0,"label":"METHICILLIN SUSCEPTIBLE PNEUMONIA DUE TO STAPHYLOCOCCUS AUREUS"},"493.2":{"code":493.2,"group":"COPD","encodedGroup":3.0,"target":0.0,"dx":49320.0,"label":"CHRONIC OBSTRUCTIVE ASTHMA UNSPECIFIED"},"398.91":{"code":398.91,"group":"CHF","encodedGroup":2.0,"target":0.0,"dx":39891.0,"label":"RHEUMATIC HEART FAILURE CONGESTIVE"},"38.49":{"code":38.49,"group":"CHF","encodedGroup":2.0,"target":0.0,"dx":3849.0,"label":"OTHER SEPTICEMIA DUE TO GRAMNEGATIVE ORGANISMS"},"482.39":{"code":482.39,"group":"PNU","encodedGroup":4.0,"target":1.0,"dx":48239.0,"label":"PNEUMONIA DUE TO OTHER STREPTOCOCCUS"},"482.3":{"code":482.3,"group":"PNU","encodedGroup":4.0,"target":1.0,"dx":48230.0,"label":"PNEUMONIA DUE TO UNSPECIFIED STREPTOCOCCUS"},"482.2":{"code":482.2,"group":"PNU","encodedGroup":4.0,"target":1.0,"dx":4822.0,"label":"PNEUMONIA DUE TO HEMOPHILUS INFLUENZAE H INFLUENZAE"},"482":{"code":482.0,"group":"PNU","encodedGroup":4.0,"target":1.0,"dx":4820.0,"label":"PNEUMONIA DUE TO KLEBSIELLA PNEUMONIAE"},"428.1":{"code":428.1,"group":"CHF","encodedGroup":2.0,"target":1.0,"dx":4281.0,"label":"LEFT HEART FAILURE"},"428.2":{"code":428.2,"group":"CHF","encodedGroup":2.0,"target":1.0,"dx":42820.0,"label":"UNSPECIFIED SYSTOLIC HEART FAILURE"},"31":{"code":31.0,"group":"COPD","encodedGroup":3.0,"target":0.0,"dx":310.0,"label":"PULMONARY DISEASES DUE TO OTHER MYCOBACTERIA"},"428.9":{"code":428.9,"group":"CHF","encodedGroup":2.0,"target":1.0,"dx":4289.0,"label":"HEART FAILURE UNSPECIFIED"},"783.3":{"code":783.3,"group":"CHF","encodedGroup":2.0,"target":0.0,"dx":7833.0,"label":"FEEDING DIFFICULTIES AND MISMANAGEMENT"},"482.81":{"code":482.81,"group":"PNU","encodedGroup":4.0,"target":1.0,"dx":48281.0,"label":"PNEUMONIA DUE TO ANAEROBES"},"483.8":{"code":483.8,"group":"PNU","encodedGroup":4.0,"target":1.0,"dx":4838.0,"label":"PNEUMONIA DUE TO OTHER SPECIFIED ORGANISM"},"482.83":{"code":482.83,"group":"PNU","encodedGroup":4.0,"target":1.0,"dx":48283.0,"label":"PNEUMONIA DUE TO OTHER GRAMNEGATIVE BACTERIA"},"492":{"code":492.0,"group":"COPD","encodedGroup":3.0,"target":0.0,"dx":4920.0,"label":"EMPHYSEMATOUS BLEB"},"276.8":{"code":276.8,"group":"CHF","encodedGroup":2.0,"target":0.0,"dx":2768.0,"label":"HYPOPOTASSEMIA"},"410.91":{"code":410.91,"group":"AMI","encodedGroup":1.0,"target":1.0,"dx":41091.0,"label":"ACUTE MYOCARDIAL INFARCTION UNSPECIFIED SITE INITIAL EPISODE OF CARE"},"485":{"code":485.0,"group":"PNU","encodedGroup":4.0,"target":1.0,"dx":485.0,"label":"BRONCHOPNEUMONIA ORGANISM UNSPECIFIED"},"404.03":{"code":404.03,"group":"CHF","encodedGroup":2.0,"target":0.0,"dx":40403.0,"label":"HYPERTENSIVE HEART AND CHRONIC KIDNEY DISEASE MALIGNANT WITH HEART FAILURE AND WITH CHRONIC KIDNEY DISEASE STAGE V OR END STAGE RENAL DISEASE"},"483":{"code":483.0,"group":"PNU","encodedGroup":4.0,"target":1.0,"dx":4830.0,"label":"PNEUMONIA DUE TO MYCOPLASMA PNEUMONIAE"}},"nurses":["1001","2001","3001","3002","4002","5002","6002","6003","7003","8003","8004","9004","10004","11004","11005","12005","13005","13006","14006","15006","16006","16007","17007","18007","19007","19008","20008","21008","21009","22009","23009","24009","54980","100292","113397","126502","139607","145604","152712","165817","178922","190916","204021","217126","230231","236228","240010","249333","250010","260010","260011","262438","270011","275543","280011","281540","290011","290012","294645","300012","307750","310012","310013","320013","320855","326852","330013","339957","340013","340014","350014","353062","360014","366167","370014","370015","372164","379272","380015","390015","392377","399485","405482","418587","431692","433998","444797","457902","471007","484112","497217","510322","827298"],"procedures":[0.17,3.31,21.01,24.0,31.1,31.42,33.23,33.24,33.27,34.04,34.06,34.52,34.91,37.0,37.21,37.22,37.23,37.34,38.91,38.93,38.95,39.79,39.95,40.11,41.31,43.11,43.19,45.16,45.24,49.04,50.13,54.22,54.91,81.91,86.05,86.11,86.59,88.72,89.19,89.45,89.49,92.05,92.29,94.62,96.04,96.07,96.56,96.6,96.71,96.72,97.23,99.04,99.14,99.15,99.17,99.18,99.19,99.21,99.22,99.23,99.25,99.29,99.61,99.78],"drgs":[4.0,5.0,120.0,121.0,130.0,131.0,132.0,137.0,138.0,139.0,140.0,190.0,191.0,194.0,207.0,421.0,425.0,720.0,892.0,894.0,950.0,951.0],"sourceRows":100000,"sourceHash":"a506f9032092954a2f118b740a121c34de3a66def0fa49ba4355d7974236b22b","resources":{"diagnosis-index|CHF|3–4":{"n":16241,"team":{"n":16241,"q1":3.0,"median":4.0,"q3":5.0},"hours":{"n":16241,"q1":25.0,"median":37.0,"q3":50.0}},"diagnosis|CHF":{"n":64521,"team":{"n":64521,"q1":2.0,"median":3.0,"q3":4.0},"hours":{"n":64521,"q1":5.0,"median":26.0,"q3":48.0}},"department-index|HEART|3–4":{"n":13505,"team":{"n":13505,"q1":3.0,"median":4.0,"q3":5.0},"hours":{"n":13505,"q1":24.0,"median":37.0,"q3":50.0}},"diagnosis-index|CHF|0":{"n":16352,"team":{"n":16352,"q1":1.0,"median":1.0,"q3":2.0},"hours":{"n":16352,"q1":0.0,"median":0.0,"q3":9.0}},"department-index|HEART|0":{"n":14159,"team":{"n":14159,"q1":1.0,"median":1.0,"q3":2.0},"hours":{"n":14159,"q1":0.0,"median":0.0,"q3":9.0}},"department-index|PULMONARY|0":{"n":1626,"team":{"n":1626,"q1":1.0,"median":1.0,"q3":2.0},"hours":{"n":1626,"q1":0.0,"median":0.0,"q3":11.0}},"diagnosis-index|CHF|1–2":{"n":18631,"team":{"n":18631,"q1":2.0,"median":3.0,"q3":4.0},"hours":{"n":18631,"q1":6.0,"median":18.0,"q3":31.0}},"department-index|HEART|1–2":{"n":15869,"team":{"n":15869,"q1":2.0,"median":3.0,"q3":4.0},"hours":{"n":15869,"q1":5.0,"median":18.0,"q3":31.0}},"diagnosis-index|PNU|0":{"n":6622,"team":{"n":6622,"q1":1.0,"median":1.0,"q3":2.0},"hours":{"n":6622,"q1":0.0,"median":0.0,"q3":9.0}},"diagnosis|PNU":{"n":27482,"team":{"n":27482,"q1":2.0,"median":3.0,"q3":5.0},"hours":{"n":27482,"q1":6.0,"median":27.0,"q3":51.0}},"department-index|GENERAL MED|0":{"n":5370,"team":{"n":5370,"q1":1.0,"median":1.0,"q3":2.0},"hours":{"n":5370,"q1":0.0,"median":0.0,"q3":9.0}},"diagnosis-index|PNU|1–2":{"n":7671,"team":{"n":7671,"q1":2.0,"median":3.0,"q3":4.0},"hours":{"n":7671,"q1":6.0,"median":19.0,"q3":32.0}},"department-index|PULMONARY|1–2":{"n":2082,"team":{"n":2082,"q1":2.0,"median":3.0,"q3":4.0},"hours":{"n":2082,"q1":7.0,"median":19.0,"q3":32.0}},"department-index|GENERAL MED|1–2":{"n":5900,"team":{"n":5900,"q1":2.0,"median":3.0,"q3":4.0},"hours":{"n":5900,"q1":6.0,"median":18.0,"q3":31.0}},"department-index|ONCOLOGY|3–4":{"n":1880,"team":{"n":1880,"q1":3.0,"median":4.0,"q3":5.0},"hours":{"n":1880,"q1":25.0,"median":37.0,"q3":50.0}},"diagnosis-index|CHF|5+":{"n":13297,"team":{"n":13297,"q1":4.0,"median":5.0,"q3":6.0},"hours":{"n":13297,"q1":50.0,"median":66.0,"q3":84.0}},"department-index|Hosp 39|5+":{"n":696,"team":{"n":696,"q1":4.0,"median":5.0,"q3":7.0},"hours":{"n":696,"q1":52.0,"median":69.0,"q3":87.0}},"department-index|HEART|5+":{"n":11034,"team":{"n":11034,"q1":4.0,"median":5.0,"q3":6.0},"hours":{"n":11034,"q1":50.0,"median":66.0,"q3":84.0}},"diagnosis-index|PNU|3–4":{"n":6947,"team":{"n":6947,"q1":3.0,"median":4.0,"q3":5.0},"hours":{"n":6947,"q1":25.0,"median":38.0,"q3":51.0}},"department-index|PULMONARY|3–4":{"n":2024,"team":{"n":2024,"q1":3.0,"median":4.0,"q3":5.0},"hours":{"n":2024,"q1":26.0,"median":38.0,"q3":50.0}},"diagnosis-index|PNU|5+":{"n":6242,"team":{"n":6242,"q1":4.0,"median":5.0,"q3":7.0},"hours":{"n":6242,"q1":51.0,"median":67.0,"q3":86.0}},"department-index|PULMONARY|5+":{"n":2054,"team":{"n":2054,"q1":4.0,"median":5.0,"q3":7.0},"hours":{"n":2054,"q1":52.0,"median":69.0,"q3":87.0}},"department-index|ONCOLOGY|0":{"n":1814,"team":{"n":1814,"q1":1.0,"median":1.0,"q3":2.0},"hours":{"n":1814,"q1":0.0,"median":0.0,"q3":10.0}},"diagnosis-index|COPD|1–2":{"n":2275,"team":{"n":2275,"q1":2.0,"median":3.0,"q3":3.0},"hours":{"n":2275,"q1":4.0,"median":17.0,"q3":29.0}},"diagnosis|COPD":{"n":7678,"team":{"n":7678,"q1":2.0,"median":3.0,"q3":4.0},"hours":{"n":7678,"q1":1.0,"median":22.0,"q3":43.0}},"department-index|GENERAL MED|3–4":{"n":5173,"team":{"n":5173,"q1":3.0,"median":4.0,"q3":5.0},"hours":{"n":5173,"q1":25.0,"median":37.0,"q3":50.0}},"department-index|GENERAL MED|5+":{"n":4133,"team":{"n":4133,"q1":4.0,"median":5.0,"q3":6.0},"hours":{"n":4133,"q1":50.0,"median":66.0,"q3":84.0}},"diagnosis-index|COPD|0":{"n":2221,"team":{"n":2221,"q1":1.0,"median":1.0,"q3":2.0},"hours":{"n":2221,"q1":0.0,"median":0.0,"q3":8.0}},"department-index|TRANSPLANT|5+":{"n":1233,"team":{"n":1233,"q1":4.0,"median":5.0,"q3":7.0},"hours":{"n":1233,"q1":50.0,"median":66.0,"q3":84.0}},"department-index|Hosp 39|3–4":{"n":761,"team":{"n":761,"q1":3.0,"median":4.0,"q3":5.0},"hours":{"n":761,"q1":24.0,"median":38.0,"q3":52.0}},"department-index|TRANSPLANT|1–2":{"n":1696,"team":{"n":1696,"q1":2.0,"median":3.0,"q3":4.0},"hours":{"n":1696,"q1":5.0,"median":20.0,"q3":32.0}},"diagnosis-index|COPD|3–4":{"n":1844,"team":{"n":1844,"q1":3.0,"median":4.0,"q3":5.0},"hours":{"n":1844,"q1":23.0,"median":36.0,"q3":49.0}},"department-index|TRANSPLANT|3–4":{"n":1468,"team":{"n":1468,"q1":3.0,"median":4.0,"q3":4.25},"hours":{"n":1468,"q1":24.0,"median":37.0,"q3":50.0}},"diagnosis-index|COPD|5+":{"n":1338,"team":{"n":1338,"q1":4.0,"median":5.0,"q3":6.0},"hours":{"n":1338,"q1":49.0,"median":64.0,"q3":83.0}},"department-index|ONCOLOGY|1–2":{"n":2143,"team":{"n":2143,"q1":2.0,"median":3.0,"q3":4.0},"hours":{"n":2143,"q1":6.0,"median":19.0,"q3":31.0}},"department-index|ONCOLOGY|5+":{"n":1525,"team":{"n":1525,"q1":4.0,"median":5.0,"q3":6.0},"hours":{"n":1525,"q1":51.0,"median":65.0,"q3":84.0}},"department-index|TRANSPLANT|0":{"n":1658,"team":{"n":1658,"q1":1.0,"median":1.0,"q3":2.0},"hours":{"n":1658,"q1":0.0,"median":0.0,"q3":8.0}},"department-index|Hosp 39|1–2":{"n":706,"team":{"n":706,"q1":2.0,"median":3.0,"q3":4.0},"hours":{"n":706,"q1":7.0,"median":19.0,"q3":32.0}},"department-index|GENERAL SURG|1–2":{"n":48,"team":{"n":48,"q1":2.0,"median":3.0,"q3":4.0},"hours":{"n":48,"q1":6.0,"median":23.0,"q3":37.0}},"diagnosis-index|AMI|3–4":{"n":92,"team":{"n":92,"q1":3.0,"median":4.0,"q3":5.0},"hours":{"n":92,"q1":34.0,"median":45.0,"q3":57.25}},"diagnosis|AMI":{"n":319,"team":{"n":319,"q1":3.0,"median":5.0,"q3":6.0},"hours":{"n":319,"q1":30.0,"median":51.0,"q3":75.5}},"department-index|WOMENS|3–4":{"n":90,"team":{"n":90,"q1":3.0,"median":4.0,"q3":5.0},"hours":{"n":90,"q1":27.0,"median":40.0,"q3":52.75}},"department-index|NEUROSCIENCES|1–2":{"n":111,"team":{"n":111,"q1":2.0,"median":3.0,"q3":4.0},"hours":{"n":111,"q1":9.5,"median":23.0,"q3":32.5}},"diagnosis-index|AMI|1–2":{"n":61,"team":{"n":61,"q1":2.0,"median":3.0,"q3":4.0},"hours":{"n":61,"q1":16.0,"median":24.0,"q3":40.0}},"department-index|Hosp 39|0":{"n":489,"team":{"n":489,"q1":1.0,"median":2.0,"q3":2.0},"hours":{"n":489,"q1":0.0,"median":0.0,"q3":12.0}},"diagnosis-index|AMI|5+":{"n":146,"team":{"n":146,"q1":5.0,"median":6.0,"q3":7.0},"hours":{"n":146,"q1":59.0,"median":77.0,"q3":97.0}},"department-index|GENERAL SURG|3–4":{"n":88,"team":{"n":88,"q1":3.0,"median":4.0,"q3":5.0},"hours":{"n":88,"q1":30.75,"median":42.0,"q3":52.25}},"department-index|WOMENS|0":{"n":22,"team":{"n":22,"q1":1.25,"median":2.0,"q3":3.0},"hours":{"n":22,"q1":0.0,"median":7.5,"q3":20.25}},"department-index|GENERAL SURG|0":{"n":19,"team":{"n":19,"q1":1.5,"median":2.0,"q3":3.5},"hours":{"n":19,"q1":0.0,"median":0.0,"q3":12.5}},"department-index|GENERAL SURG|5+":{"n":120,"team":{"n":120,"q1":5.0,"median":6.0,"q3":7.0},"hours":{"n":120,"q1":54.0,"median":67.5,"q3":89.0}},"department-index|NEUROSCIENCES|3–4":{"n":129,"team":{"n":129,"q1":3.0,"median":4.0,"q3":5.0},"hours":{"n":129,"q1":30.0,"median":41.0,"q3":52.0}},"department-index|NEUROSCIENCES|5+":{"n":165,"team":{"n":165,"q1":5.0,"median":6.0,"q3":7.0},"hours":{"n":165,"q1":56.0,"median":71.0,"q3":89.0}},"diagnosis-index|AMI|0":{"n":20,"team":{"n":20,"q1":1.0,"median":2.0,"q3":2.25},"hours":{"n":20,"q1":0.0,"median":9.5,"q3":19.25}},"department-index|WOMENS|1–2":{"n":73,"team":{"n":73,"q1":2.0,"median":3.0,"q3":4.0},"hours":{"n":73,"q1":12.0,"median":24.0,"q3":32.0}},"department-index|PSYCH|0":{"n":11,"team":{"n":11,"q1":1.0,"median":2.0,"q3":2.0},"hours":{"n":11,"q1":0.0,"median":0.0,"q3":4.5}},"department-index|NEUROSCIENCES|0":{"n":47,"team":{"n":47,"q1":1.0,"median":2.0,"q3":3.0},"hours":{"n":47,"q1":0.0,"median":0.0,"q3":14.0}},"department-index|WOMENS|5+":{"n":62,"team":{"n":62,"q1":4.0,"median":5.0,"q3":6.0},"hours":{"n":62,"q1":47.5,"median":65.0,"q3":82.0}},"department-index|PSYCH|3–4":{"n":6,"team":{"n":6,"q1":2.25,"median":3.5,"q3":4.0},"hours":{"n":6,"q1":37.75,"median":42.0,"q3":47.75}},"department-index|PSYCH|1–2":{"n":10,"team":{"n":10,"q1":1.5,"median":3.0,"q3":3.0},"hours":{"n":10,"q1":18.0,"median":22.5,"q3":37.5}},"department-index|PSYCH|5+":{"n":1,"team":{"n":1,"q1":6.0,"median":6.0,"q3":6.0},"hours":{"n":1,"q1":83.0,"median":83.0,"q3":83.0}}},"resourceRule":"v1: group + illustrative index bucket; minimum 30; median and IQR","indexBuckets":["0","1–2","3–4","5+"]}</script>
+<script>
+'use strict';
+const REF=JSON.parse(document.getElementById('reference-data').textContent);
+const el=id=>document.getElementById(id);
+const text=(id,value)=>{el(id).textContent=value;};
+const make=(tag,value,cls)=>{const n=document.createElement(tag);if(value!==undefined)n.textContent=value;if(cls)n.className=cls;return n;};
+const number=value=>{if(value===null||value===undefined||String(value).trim()===''||String(value).trim()==='.')return null;const n=Number(value);return Number.isFinite(n)?n:null;};
+const key=value=>number(value)===null?String(value??'').trim():String(number(value));
+const fmt=value=>Number(value).toLocaleString('en-AU',{maximumFractionDigits:1});
+const state={record:null,revision:0,loadRevision:0,searchRevision:0,scoring:false,controller:null,list:[],results:new Map(),checklists:new Map(),discharges:new Map(),viewingSnapshot:null};
+const first=['Alex','Jamie','Morgan','Taylor','Jordan','Casey','Riley'],last=['Lee','Brown','Wilson','Patel','Kim','Chen','Martin'];
+function alias(id,role='patient'){if(role==='patient'&&String(id)==='500000616')return 'Taylor Martin';let h=0;for(const c of String(role+id))h=(h*31+c.charCodeAt(0))>>>0;return first[h%7]+' '+last[Math.floor(h/7)%7];}
+const deptNames={HEART:'Heart care','GENERAL MED':'General medicine','GENERAL SURG':'General surgery',PULMONARY:'Pulmonary care',WOMENS:"Women’s health",PSYCH:'Mental health',ONCOLOGY:'Oncology',TRANSPLANT:'Transplant',NEUROSCIENCES:'Neurosciences'};
+const friendly=value=>deptNames[value]||value;
+function notice(message,error=false){text('status',message);el('status').className='notice'+(error?' error':'');}
+function endpoint(){const p=el('program').value;return p.includes('PROGRAM')||!p.startsWith('/')?'':p;}
+const admissionKey=record=>key(record.PATIENT_NUMBER)+'|'+key(record.ENCOUNTER_KEY);
+const copy=value=>JSON.parse(JSON.stringify(value));
+function storageKey(){return 'patient-discharge:v1:'+endpoint()+':'+REF.version;}
+function restoreDischarges(){
+  try{
+    const saved=JSON.parse(sessionStorage.getItem(storageKey())||'[]');if(!Array.isArray(saved))return;
+    for(const [id,s] of saved){const p=number(s?.result?.PROBABILITY);if(s?.record&&admissionKey(s.record)===id&&s.values&&s.checklist&&Array.isArray(s.groups)&&s.resources&&p!==null&&p>=0&&p<=1)state.discharges.set(id,s);}
+  }catch{/* No saved records are used when tab storage is unavailable or invalid. */}
+}
+function persistDischarges(){try{sessionStorage.setItem(storageKey(),JSON.stringify([...state.discharges]));return true;}catch{return false;}}
+async function api(action,values={},signal){
+  const program=endpoint();if(!program)throw Error('Open this page as the SAS Job HTML form. The program placeholder has not been resolved.');
+  const params=new URLSearchParams({_program:program,_action:'execute',_output_type:'json',ui_action:action,ui_version:REF.version,...values});
+  const csrf=el('csrf').value;if(csrf&&!csrf.includes('CSRF'))params.set('_csrf',csrf);
+  const response=await fetch('/SASJobExecution/',{method:'POST',credentials:'same-origin',body:params,signal});
+  const body=await response.text();let data;
+  try{data=JSON.parse(body);}catch{throw Error('SAS returned a non-JSON response. Check the Job log, compute context and _OUTPUT_TYPE=json.');}
+  if(!response.ok||!data.ok)throw Error(data.error||'SAS request failed.');return data;
+}
+function normalized(row){return Object.fromEntries(Object.entries(row).map(([k,v])=>[k.toUpperCase(),v]));}
+function selectOptions(select,options,value){
+  select.replaceChildren(new Option('Select…',''));
+  options.forEach(([v,label])=>select.add(new Option(label,String(v))));
+  const chosen=value===null||value===undefined?'':String(value);
+  if(chosen&&!options.some(([v])=>String(v)===chosen))select.add(new Option(chosen+' · verify source',chosen));
+  select.value=chosen;
+}
+function choices(field){return Object.keys(REF.maps[field]).sort((a,b)=>a.localeCompare(b)).map(v=>[v,field==='GENDER'?({M:'Male',F:'Female'})[v]||v:field==='DEPARTMENT'?friendly(v):v]);}
+function control(id,label,value,options,container='fields',wide=false,type='select'){
+  const wrapper=make('label',label,wide?'wide':'');let input;
+  if(type==='select'){input=make('select');selectOptions(input,options,value);}else{input=make('input');input.type='number';input.min='0';input.step='any';input.value=value??'';}
+  input.id=id;wrapper.append(input);el(container).append(wrapper);return input;
+}
+function recordedControl(id,label,value,display,container='fields',wide=false){
+  const wrapper=make('div',undefined,wide?'wide':''),caption=make('small',label+' · recorded');
+  const hidden=make('input');hidden.type='hidden';hidden.id=id;hidden.value=value??'';
+  wrapper.append(caption,make('div',display||'Not available','recorded-field'),hidden);el(container).append(wrapper);
+}
+const range=(max,step=1)=>Array.from({length:Math.floor(max/step)+1},(_,i)=>[i*step,String(i*step)]);
+function invalidate(message='Inputs changed. Run a new prediction.'){
+  state.revision++;state.controller?.abort();state.scoring=false;
+  text('probability','—');text('review-badge','Prediction not run');text('prediction-note',message);text('meta','');el('risk').className='panel risk';el('meter').hidden=true;el('predict').disabled=!state.record;text('predict','Predict readmission');
+}
+function populate(record){
+  state.record=record;state.viewingSnapshot=null;el('saved-info').hidden=true;el('predict').hidden=false;el('reset').hidden=false;el('edit-discharge').hidden=true;text('admission-state','At discharge');el('workspace').hidden=false;el('empty').hidden=true;el('patient-list').hidden=true;el('back-list').hidden=false;
+  text('patient-name',alias(record.PATIENT_NUMBER));text('patient-id','Patient number '+key(record.PATIENT_NUMBER));text('encounter-id','Admission reference '+key(record.ENCOUNTER_KEY));
+  selectOptions(el('doctor'),Object.keys(REF.maps.DOCTOR).sort((a,b)=>Number(a)-Number(b)).map(v=>[v,v+' · Dr '+alias(v,'doctor')]),key(record.DOCTOR));
+  selectOptions(el('nurse'),REF.nurses.map(v=>[v,v+' · '+alias(v,'nurse')]),key(record.DISCH_NURSE_ID));el('doctor').disabled=false;el('nurse').disabled=false;
+  el('fields').replaceChildren();el('extra-fields').replaceChildren();
+  control('department','Department',record.DEPARTMENT,choices('DEPARTMENT'));
+  control('gender','Gender',record.GENDER,choices('GENDER'));
+  control('age','Patient age (years)',record.PATIENT_AGE,range(120));
+  control('los','Length of stay (days)',record.ADMIT_LOS,range(365));
+  const diagKey=key(record.DIAGNOSIS_ICD_CODE),diagnosis=REF.diagnoses[diagKey];
+  recordedControl('diagnosis','Diagnosis',diagKey,record.DIAGNOSIS_LONG_DESC||diagnosis?.label,'fields',true);
+  recordedControl('icd','ICD code',diagKey,diagKey);
+  control('discharge','Discharge destination',record.DISCHARGED_TO,choices('DISCHARGED_TO'),'fields',true);
+  control('chronic','Number of chronic conditions',record.NUM_CHRONIC_COND,range(30));
+  control('icu','ICU days',record.ICU_DAYS,range(365));
+  control('visits','Number of visits',record.NUM_VISITS,range(100));
+  control('index','Comorbidity index · source scale',record.COMORBIDITY_INDEX,range(19));
+  control('race','Race · recorded category',record.RACE_CD,choices('RACE_CD'),'extra-fields');
+  control('location','Patient location',[record.STATECODE,record.CITY,record.COUNTY_NAME].map(v=>String(v??'').trim()).join('|'),Object.keys(REF.locations).sort().map(v=>[v,v.split('|').join(' / ')]),'extra-fields',true);
+  recordedControl('drg','APR DRG code',record.DRG_APR_CODE,key(record.DRG_APR_CODE),'extra-fields');
+  recordedControl('severity','APR DRG severity',record.DRG_APR_SEVERITY,key(record.DRG_APR_SEVERITY),'extra-fields');
+  recordedControl('procedure','Procedure ICD code',record.PROCEDURE_ICD_CODE,key(record.PROCEDURE_ICD_CODE),'extra-fields');
+  recordedControl('operations','Operation count',record.OPERATION_COUNT,key(record.OPERATION_COUNT),'extra-fields');
+  recordedControl('orders','Order set used',record.ORDER_SET_USED,number(record.ORDER_SET_USED)===null?'':number(record.ORDER_SET_USED)===1?'Yes · 1':'No · 0','extra-fields');
+  control('charges','Order total charges · source units',record.ORDER_TOTAL_CHARGES,[],'extra-fields',false,'number');
+  text('recorded-team',number(record.CARE_TEAM_SIZE)===null?'Not available':fmt(record.CARE_TEAM_SIZE)+' people');
+  text('recorded-hours',number(record.MONITORING_HOURS)===null?'Not available':fmt(record.MONITORING_HOURS)+' hours');
+  invalidate('Run the SAS model for these patient inputs.');updateDerived();
+  const missing=[...el('extra-fields').querySelectorAll('select,input')].some(n=>!n.value);el('advanced').open=missing;
+  notice('Patient loaded from SAS. Review the inputs, then click Predict readmission.');
+}
+function values(){const out={};for(const id of ['doctor','nurse','department','gender','age','los','diagnosis','icd','discharge','chronic','icu','visits','index','race','location','drg','severity','procedure','operations','orders','charges'])out[id]=el(id)?.value??'';return out;}
+function modelInputs(){
+  const v=values(),d=REF.diagnoses[v.diagnosis];const map=(f,val)=>REF.maps[f][val];
+  const entries=[['department',map('DEPARTMENT',v.department)],['diagnosis',d?.code],['diagnosis',d?.encodedGroup],['doctor',map('DOCTOR',v.doctor)],['gender',map('GENDER',v.gender)],['diagnosis',d?.target],['location',REF.locations[v.location]],['race',map('RACE_CD',v.race)],['los',number(v.los)],['discharge',map('DISCHARGED_TO',v.discharge)],['drg',number(v.drg)],['severity',number(v.severity)],['diagnosis',d?.dx],['icu',number(v.icu)],['chronic',number(v.chronic)],['visits',number(v.visits)],['operations',number(v.operations)],['orders',number(v.orders)],['charges',number(v.charges)],['age',number(v.age)],['procedure',number(v.procedure)]];
+  document.querySelectorAll('.invalid').forEach(n=>n.classList.remove('invalid'));
+  const bad=entries.filter(([,n])=>number(n)===null||number(n)<0).map(([id])=>id);
+  if(number(v.icu)>number(v.los))bad.push('icu');
+  if(number(v.age)>120)bad.push('age');
+  for(const id of ['chronic','visits','operations'])if(!Number.isInteger(number(v[id])))bad.push(id);
+  if(!['0','1','2','3','4'].includes(v.severity))bad.push('severity');
+  if(!['0','1'].includes(v.orders))bad.push('orders');
+  if(bad.length){bad.forEach(id=>el(id).classList.add('invalid'));if(bad.some(id=>el('extra-fields').contains(el(id))))el('advanced').open=true;const names={drg:'recorded APR DRG code',diagnosis:'recorded diagnosis / ICD code',procedure:'recorded Procedure ICD code',severity:'recorded APR DRG severity',operations:'recorded Operation count',orders:'recorded Order set used',discharge:'Discharge destination',icu:'ICU days (must not exceed length of stay)'};throw Error('Check '+[...new Set(bad)].map(id=>names[id]||id).join(', ')+'. Missing recorded codes need correction in the source; other highlighted inputs can be edited here.');}
+  return Object.fromEntries(entries.map(([,n],i)=>['p'+(i+1),String(n)]));
+}
+function indexBucket(value){const n=number(value);return n===null||n<0?'unknown':n===0?'0':n<=2?'1–2':n<=4?'3–4':'5+';}
+function updateDerived(){
+  if(!state.record)return;
+  const v=values(),d=REF.diagnoses[v.diagnosis],bucket=indexBucket(v.index);
+  text('mapping-note',d?'Diagnosis group: '+d.group+' · ICD9 target: '+d.target+' · DX_CODE: '+d.dx+'. These are filled from the verified training lookup.':'Diagnosis has no verified training mapping.');
+  renderChecklist(d,v);
+  renderResources(d,v,bucket);
+}
+const educationSources={
+  ideal:['AHRQ · IDEAL discharge planning','https://www.ahrq.gov/patient-safety/patients-families/engagingfamilies/strategy4/index.html'],
+  red:['AHRQ · Re-Engineered Discharge','https://www.ahrq.gov/patient-safety/settings/hospital/red/toolkit/redtool3.html'],
+  CHF:['NHLBI · Heart failure','https://www.nhlbi.nih.gov/health/heart-failure/living-with'],
+  PNU:['NHLBI · Pneumonia recovery','https://www.nhlbi.nih.gov/health/pneumonia/recovery'],
+  AMI:['NHLBI · Heart attack recovery','https://www.nhlbi.nih.gov/health/heart-attack/recovery'],
+  COPD:['NHLBI · Living with COPD','https://www.nhlbi.nih.gov/health/copd/living-with'],
+  multi:['NICE NG56 · Multimorbidity','https://www.nice.org.uk/guidance/ng56/chapter/recommendations']
+};
+function educationItems(d,v){
+  const disease={
+    CHF:[
+      ['chf-symptoms','Explain heart-failure warning signs','Tell your care team about worsening breathlessness, swelling or unexpected weight changes. Review the written plan for when to call and when to seek emergency help.','CHF'],
+      ['chf-monitor','Review the agreed daily monitoring plan','Let us check how you will monitor your weight and symptoms, and any salt or fluid instructions your clinician has given you. Use your individual plan; do not change medicines yourself.','CHF']
+    ],
+    PNU:[
+      ['pnu-treatment','Explain pneumonia treatment and recovery','Take medicines as prescribed. If antibiotics were prescribed, complete the prescribed course unless your clinician changes it. Recovery can take time; agree how to resume activity with your care team.','PNU'],
+      ['pnu-worsening','Explain when pneumonia needs reassessment','Contact your care team if you worsen or are not recovering as expected. Seek urgent help for severe breathing difficulty. Confirm follow-up and any planned repeat tests.','PNU']
+    ],
+    AMI:[
+      ['ami-emergency','Explain the emergency plan after a heart attack','If symptoms suggest another heart attack, call emergency services promptly. Review the specific warning signs and emergency instructions in your discharge plan.','AMI'],
+      ['ami-rehab','Review medicines and cardiac rehabilitation','Follow the prescribed medicine plan and speak with your team before stopping medicines. Confirm cardiac rehabilitation and the agreed return to activity.','AMI']
+    ],
+    COPD:[
+      ['copd-inhaler','Check inhaler use with a demonstration','Show me how you use each prescribed inhaler. Let us practise the technique together and check which medicine is for regular use and which is for worsening symptoms.','COPD'],
+      ['copd-action','Explain the COPD flare-up action plan','Review what to do if breathing worsens or infection symptoms develop, and when to seek emergency help. Discuss avoiding smoke and other known triggers.','COPD']
+    ]
+  };
+  const steps=[...(disease[d?.group]||[['general-warning','Explain condition-specific warning signs','Review the documented diagnosis and the treating team’s written warning signs and contact instructions.','ideal']]),
+    ['medicines','Explain the discharge medicine list','Review what each medicine is for, its written schedule, changes from before admission and how to obtain it. Ask the patient to describe the plan in their own words.','red'],
+    ['followup','Confirm follow-up, pending results and contacts','Explain the next appointments, who will follow up outstanding results and whom to contact with questions. Check that the patient can attend or arrange help.','ideal'],
+    ['teachback','Confirm understanding and practical support','Please explain what you will do at home and whom you will call if you feel worse. With your agreement, let us include a support person and check access to medicines and everyday help.','red']
+  ];
+  const index=number(v.index);
+  if(index===null)steps.push(['history','Confirm missing comorbidity information','Let us confirm your other conditions and their care plans; the recorded index is unavailable.','multi']);
+  else if(index===0)steps.push(['history','Confirm other conditions despite an index of zero','Please tell us about other conditions and treatments. A recorded zero does not replace checking your full history.','multi']);
+  else steps.push(['coordination','Review other conditions and coordinate the plan','The record shows a comorbidity index of '+v.index+'. Let us confirm the actual conditions, any conflicting advice, treatment difficulties and your priorities. Agree who coordinates care and whom you can contact.','multi']);
+  return steps;
+}
+function educationGroups(d,v){
+  const items=educationItems(d,v),support=new Set(['teachback','history','coordination']);
+  return [
+    ['condition','Condition-specific precautions and worsening symptoms explained',items.filter(([id])=>!support.has(id)&&!['medicines','followup'].includes(id))],
+    ['medicines-followup','Medicines and follow-up plan explained',items.filter(([id])=>['medicines','followup'].includes(id))],
+    ['support-understanding','Other conditions, home support and patient understanding checked',items.filter(([id])=>support.has(id))]
+  ];
+}
+function renderChecklist(d,v){
+  const identity=key(state.record.PATIENT_NUMBER)+'|'+key(state.record.ENCOUNTER_KEY);
+  const context=JSON.stringify(['three-topics',v.diagnosis,v.index,v.discharge,v.chronic]);
+  let checklist=state.checklists.get(identity);
+  if(!checklist||checklist.context!==context){checklist={context,completed:new Map()};state.checklists.set(identity,checklist);}
+  const steps=state.viewingSnapshot?.groups||educationGroups(d,v),progress=()=>text('check-progress',steps.filter(([id])=>checklist.completed.has(id)).length+' / '+steps.length+' completed');
+  el('prompts').replaceChildren();
+  for(const [id,title,items] of steps){
+    const block=make('div',undefined,'step'),label=make('label',undefined,'check-label'),check=make('input');check.type='checkbox';check.disabled=!!state.viewingSnapshot;check.setAttribute('aria-label','Explained: '+title);
+    label.append(check,make('span',title,'check-title'));
+    const content=make('div',undefined,'check-body'),details=make('details');details.append(make('summary','Explanation & sources'));
+    for(const [,heading,body,source] of items){
+      const link=make('a',educationSources[source][0]);link.href=educationSources[source][1];link.target='_blank';link.rel='noopener';
+      const section=make('div');section.style.margin='12px 0';section.append(make('h3',heading),make('p','“'+body+'”'),link);details.append(section);
+    }
+    if(id==='support-understanding')details.append(make('small','Comorbidity index '+(v.index||'unavailable')+' prompts history and coordination checks; it is not a validated severity category.'));
+    const meta=make('p',undefined,'check-meta');content.append(meta,details);block.append(label,content);
+    const refresh=()=>{const completion=checklist.completed.get(id);check.checked=!!completion;block.classList.toggle('done',!!completion);meta.hidden=!completion;meta.textContent=completion?'Completed · Nurse '+completion.nurse+' · '+new Date(completion.at).toLocaleString('en-AU'):'';progress();};
+    check.addEventListener('change',()=>{if(check.checked){if(!v.nurse){check.checked=false;notice('Select the discharge nurse before marking education complete.',true);return;}checklist.completed.set(id,{nurse:v.nurse,at:new Date().toISOString()});}else checklist.completed.delete(id);refresh();});
+    refresh();el('prompts').append(block);
+  }
+  progress();
+}
+function renderResources(d,v,bucket){
+  if(state.viewingSnapshot){renderSavedResources(state.viewingSnapshot.resources);return;}
+  const options=[];
+  if(d&&bucket!=='unknown')options.push(['diagnosis-index|'+d.group+'|'+bucket,'Diagnosis group '+d.group+' + index group '+bucket]);
+  if(d)options.push(['diagnosis|'+d.group,'Diagnosis group '+d.group+' (broader fallback)']);
+  if(bucket!=='unknown')options.push(['department-index|'+v.department+'|'+bucket,friendly(v.department)+' + index group '+bucket+' (broader fallback)']);
+  const match=options.find(([k])=>{const r=REF.resources[k];return r&&r.team?.n>=30&&r.hours?.n>=30;});el('resources').replaceChildren();
+  if(!match){text('resource-summary','Not enough comparable records. A minimum of 30 usable observations per resource is required.');return;}
+  const [k,label]=match,r=REF.resources[k];text('resource-summary',label+' · '+fmt(r.n)+' reference admissions · source snapshot '+fmt(REF.sourceRows)+' rows.');
+  for(const [short,title,unit] of [['team','Care team size','people'],['hours','Monitoring time','hours']]){
+    const s=r[short],section=make('div',undefined,'resource');section.append(make('h3',title));const value=make('div',fmt(s.median)+' '+unit,'value');section.append(value,make('p','Middle 50%: '+fmt(s.q1)+'–'+fmt(s.q3)+' '+unit+' · '+fmt(s.n)+' observations','resource-caption'));
+    const max=Math.max(s.q3,s.median,1),bar=make('div',undefined,'resource-bar'),fill=make('span');fill.style.width=(s.median/max*100)+'%';bar.append(fill);section.append(bar);el('resources').append(section);
+  }
+}
+function captureResources(){return {summary:el('resource-summary').textContent,cards:[...el('resources').children].map(n=>({title:n.querySelector('h3').textContent,value:n.querySelector('.value').textContent,caption:n.querySelector('.resource-caption').textContent,width:n.querySelector('.resource-bar span').style.width}))};}
+function renderSavedResources(saved){
+  text('resource-summary',saved.summary);el('resources').replaceChildren();
+  for(const r of saved.cards){const section=make('div',undefined,'resource'),bar=make('div',undefined,'resource-bar'),fill=make('span');fill.style.width=r.width;bar.append(fill);section.append(make('h3',r.title),make('div',r.value,'value'),make('p',r.caption,'resource-caption'),bar);el('resources').append(section);}
+}
+function displayPrediction(r){
+  const p=number(r.PROBABILITY);
+  const scenarioWarning='Scenario: Procedure ICD code supplied by user; missing in original record.';
+  const previousWarning=String(r.WARNING||'');
+  const warningText=previousWarning.replace(scenarioWarning,'').replace(/^[\s.|]+|[\s.|]+$/g,'');
+  const warning=!!warningText||(r.PREDICTION_STATUS==='SCORED_WITH_WARNING'&&!previousWarning.includes(scenarioWarning));
+  const kind=warning?'review':p>.13?'priority':'standard';
+  el('risk').className='panel risk '+kind;text('probability',(p*100).toFixed(2)+'%');text('review-badge',warning?'Model warning · review':kind==='priority'?'Priority review':'Standard review');
+  el('meter').hidden=false;el('fill').style.width=(p*100)+'%';
+  text('prediction-note',warning?'SAS returned a warning: '+(warningText||'unspecified')+'. Review the inputs before using this result.':kind==='priority'?'Above the existing 13% rule. Prioritise review of this patient’s discharge and support plan.':'At or below the existing 13% rule. Continue the standard discharge review.');
+  text('meta',(r.MODEL_VERSION||'SAS model')+' · '+(r.SCORED_AT||'just scored'));
+}
+function showCompleted(snapshot){
+  populate(copy(snapshot.record));
+  for(const [id,value] of Object.entries(snapshot.values)){const node=el(id);if(!node)continue;if(node.tagName==='SELECT'&&![...node.options].some(o=>o.value===String(value)))node.add(new Option(String(value),String(value)));node.value=value;}
+  state.viewingSnapshot=snapshot;
+  state.checklists.set(admissionKey(snapshot.record),{context:snapshot.checklist.context,completed:new Map(snapshot.checklist.completed)});
+  updateDerived();
+  document.querySelectorAll('#fields select,#fields input,#extra-fields select,#extra-fields input,.staff select').forEach(n=>{n.disabled=true;});
+  el('predict').hidden=true;el('reset').hidden=true;el('edit-discharge').hidden=false;text('admission-state','Discharged');
+  text('saved-info','Last discharge · '+new Date(snapshot.completedAt).toLocaleString('en-AU'));el('saved-info').hidden=false;
+  displayPrediction(snapshot.result);notice('Showing the last completed discharge record.');
+}
+function editCompleted(){
+  if(!state.viewingSnapshot)return;state.viewingSnapshot=null;
+  document.querySelectorAll('#fields select,#fields input,#extra-fields select,#extra-fields input,.staff select').forEach(n=>{n.disabled=false;});
+  el('predict').hidden=false;el('reset').hidden=false;el('edit-discharge').hidden=true;el('saved-info').hidden=true;text('admission-state','Updating discharge');
+  invalidate();updateDerived();notice('Edit the inputs and predict again to update the discharge. The previous completed record is kept until a new prediction succeeds.');
+}
+async function search(event){
+  event?.preventDefault();const query=el('patient-query').value.trim();
+  if(query&&(!Number.isSafeInteger(Number(query))||Number(query)<0)){notice('Enter a numeric patient number.',true);return;}
+  const revision=++state.searchRevision;el('find').disabled=true;notice('Searching the SAS source…');
+  try{const response=await api('search',{ui_patient:query});if(revision!==state.searchRevision)return;
+    const rows=(response.patients||[]).map(normalized);state.list=rows;el('patient-picker').replaceChildren(new Option(rows.length?'Select a patient / admission':'No matching patient',''));
+    rows.forEach(r=>{const opt=new Option(key(r.PATIENT_NUMBER)+' · '+alias(r.PATIENT_NUMBER)+' · admission '+key(r.ENCOUNTER_KEY),key(r.PATIENT_NUMBER)+'|'+key(r.ENCOUNTER_KEY));el('patient-picker').add(opt);});
+    showList();notice(query?rows.length+' matching admission(s). Click Review to open.':'Showing up to 25 example admissions. Exact patient-number search checks the full source.');
+  }catch(error){notice(error.message,true);}finally{if(revision===state.searchRevision)el('find').disabled=false;}
+}
+function renderList(){
+  el('patient-rows').replaceChildren();
+  for(const r of state.list){
+    const id=key(r.PATIENT_NUMBER)+'|'+key(r.ENCOUNTER_KEY),result=state.results.get(id),tr=make('tr');
+    const completed=state.discharges.get(id),savedResult=completed?.result;
+    const status=completed?'Discharged':'Not discharged';
+    const cells=[key(r.PATIENT_NUMBER),alias(r.PATIENT_NUMBER),completed?fmt(completed.values.age):number(r.PATIENT_AGE)===null?'—':fmt(r.PATIENT_AGE),friendly(completed?completed.values.department:r.DEPARTMENT),savedResult?(number(savedResult.PROBABILITY)*100).toFixed(2)+'%':'—',status];
+    cells.forEach((value,i)=>{const cell=make('td',value);cell.style='padding:12px 10px;border-bottom:1px solid var(--line)';if(i===5){cell.style.color=completed?'var(--teal)':'var(--muted)';cell.style.fontWeight=completed?'700':'400';cell.title=completed?'Completed in this workspace at '+new Date(completed.completedAt).toLocaleString('en-AU'):'No completed discharge in this workspace.';}tr.append(cell);});
+    const cell=make('td'),action=completed?'Discharged':'Start discharging',button=make('button',action,'secondary');cell.style.padding='10px';button.setAttribute('aria-label',action+' patient '+key(r.PATIENT_NUMBER)+' admission '+key(r.ENCOUNTER_KEY));
+    button.addEventListener('click',()=>{el('patient-picker').value=id;loadSelected();});cell.append(button);tr.append(cell);el('patient-rows').append(tr);
+  }
+  el('patient-list').querySelectorAll('th').forEach(n=>{n.style='padding:12px 10px;font-size:12px;color:var(--muted)';});
+  text('list-note',state.list.length?state.list.length+' admission(s) shown.':'No matching patient found. Try another exact patient number.');
+}
+function showList(){
+  state.loadRevision++;invalidate('Choose a patient from the list.');el('workspace').hidden=true;el('empty').hidden=true;el('patient-list').hidden=false;el('back-list').hidden=true;el('doctor').disabled=true;el('nurse').disabled=true;renderList();
+}
+function clearSessionResult(){if(state.record)state.results.delete(key(state.record.PATIENT_NUMBER)+'|'+key(state.record.ENCOUNTER_KEY));}
+async function loadSelected(){
+  const selected=el('patient-picker').value;if(!selected)return;
+  const [patient,encounter]=selected.split('|'),revision=++state.loadRevision;
+  invalidate('Loading another patient…');state.record=null;el('workspace').hidden=true;el('empty').hidden=false;el('doctor').disabled=true;el('nurse').disabled=true;notice('Loading the selected admission…');
+  const completed=state.discharges.get(patient+'|'+encounter);if(completed){showCompleted(completed);return;}
+  try{const result=await api('load',{ui_patient:patient,ui_encounter:encounter});if(revision!==state.loadRevision)return;
+    if(result.patient?.length!==1)throw Error('SAS did not return one unambiguous admission.');populate(normalized(result.patient[0]));
+  }catch(error){if(revision===state.loadRevision)notice(error.message,true);}
+}
+async function predict(){
+  if(!state.record||state.scoring||state.viewingSnapshot)return;
+  let inputs;try{inputs=modelInputs();}catch(error){notice(error.message,true);return;}
+  const submittedValues=copy(values());
+  invalidate('Running the SAS model…');state.scoring=true;el('predict').disabled=true;text('predict','Running model…');
+  const revision=state.revision,request=String(Date.now())+'-'+revision,controller=new AbortController();state.controller=controller;
+  const timer=setTimeout(()=>controller.abort(),120000);
+  try{
+    const response=await api('score',{...inputs,ui_patient:key(state.record.PATIENT_NUMBER),ui_encounter:key(state.record.ENCOUNTER_KEY),ui_request:request},controller.signal);
+    if(revision!==state.revision)return;
+    if(response.result?.length!==1)throw Error('The model must return exactly one result.');const r=normalized(response.result[0]);
+    if(r.REQUEST_ID!==request)throw Error('The returned result belongs to another request.');
+    const p=number(r.PROBABILITY);if(p===null||p<0||p>1||!['SCORED','SCORED_WITH_WARNING'].includes(r.PREDICTION_STATUS))throw Error('No usable probability was returned by SAS. Check the model log.');
+    const identity=admissionKey(state.record),checklist=state.checklists.get(identity);
+    const snapshot=copy({record:state.record,values:submittedValues,result:r,modelInputs:inputs,completedAt:new Date().toISOString(),checklist:{context:checklist.context,completed:[...checklist.completed]},groups:educationGroups(REF.diagnoses[submittedValues.diagnosis],submittedValues),resources:captureResources()});
+    state.discharges.set(identity,snapshot);const persisted=persistDischarges();showCompleted(snapshot);
+    notice(persisted?'Discharge completed. The probability and discharge details are saved in this browser tab.':'Discharge completed. Details are kept on this open page; browser tab storage is unavailable.');
+  }catch(error){if(revision===state.revision){const message=error.name==='AbortError'?'Prediction timed out. Retry or inspect the SAS Job log.':error.message;text('prediction-note',message);notice(message,true);}}
+  finally{clearTimeout(timer);if(revision===state.revision){state.scoring=false;el('predict').disabled=false;text('predict','Predict readmission');}}
+}
+el('search-form').addEventListener('submit',search);el('patient-picker').addEventListener('change',loadSelected);el('back-list').addEventListener('click',showList);el('predict').addEventListener('click',predict);el('edit-discharge').addEventListener('click',editCompleted);el('reset').addEventListener('click',()=>{if(state.record&&!state.viewingSnapshot){clearSessionResult();populate(state.record);}});
+for(const container of [el('fields'),el('extra-fields'),document.querySelector('.staff')])container.addEventListener('change',event=>{
+  if(!state.record||state.viewingSnapshot)return;
+  clearSessionResult();invalidate();updateDerived();
+});
+el('extra-fields').addEventListener('input',event=>{if(event.target.tagName==='INPUT'&&state.record){clearSessionResult();invalidate();}});
+window.addEventListener('message',event=>{
+  if(event.origin!==location.origin||event.source!==parent||parent===window)return;
+  const m=event.data;if(!m||!Array.isArray(m.columns)||!Array.isArray(m.data))return;
+  const position=name=>m.columns.findIndex(c=>[c.name,c.label].some(v=>String(v??'').toUpperCase()===name));
+  const p=position('PATIENT_NUMBER'),e=position('ENCOUNTER_KEY');
+  if(m.data.length===1&&p>=0&&e>=0){const patient=key(m.data[0][p]),encounter=key(m.data[0][e]);el('patient-picker').replaceChildren(new Option(patient+' · '+alias(patient)+' · admission '+encounter,patient+'|'+encounter));loadSelected();}
+});
+
+// Fixed source snapshot for the presentation case; no fabricated procedure code.
+// EDIT THIS VALUE to change Taylor's hypothetical Procedure ICD code.
+// This is a scenario input, not a correction to the original source record.
+const TAYLOR_PROCEDURE_SCENARIO = '88.72';
+const TAYLOR_SOURCE = {"ENCOUNTER_KEY": "300069926", "PATIENT_NUMBER": "500000616", "DOCTOR": "226751", "ICU_DAYS": "0", "DEPARTMENT": "PULMONARY", "DISCHARGED_TO": "ROUTINE DSCHG, HOME", "STANDARD_ORDERS_USED": "Y", "NUM_CHRONIC_COND": "0", "DISCH_NURSE_ID": "10004", "ORDER_SET_USED": "1", "ORDER_TOTAL_CHARGES": "34383", "GENDER": "F", "ZIP": "33455", "STATECODE": "FL", "CITY": "Hobe Sound", "COUNTY_NAME": "Martin", "X": "-80.143309", "Y": "27.075482", "REGION": "Region 3", "RACE_CD": "White", "PATIENT_AGE": "41", "DIAGNOSIS_GROUP": "CHF", "ICD9_TARGET": "1", "MS_DRG_CODE": "292", "MS_DRG_DESC": "HEART FAILURE & SHOCK W CC", "DRG_APR_CODE": "194", "DRG_APR_DESC": "HEART FAILURE", "DRG_APR_SEVERITY": "3", "DIAGNOSIS_SUBCAT_CODE": "428", "DIAGNOSIS_SUBCAT_DESC": "HEART FAILURE", "DIAGNOSIS_ICD_CODE": "428.33", "DIAGNOSIS_LONG_DESC": "ACUTE ON CHRONIC DIASTOLIC HEART FAILURE", "PROCEDURE_SUBCAT_CODE": null, "PROCEDURE_SUBCAT_DESC": null, "PROCEDURE_ICD_CODE": null, "PROCEDURE_LONG_DESC": null, "DX_CODE": "42833", "DX_GROUP": "Congestive heart failure; nonhypertensive [108.]", "OPERATION_COUNT": "2", "MONITORING_HOURS": "22", "COMORBIDITY_INDEX": "1", "CARE_TEAM_SIZE": "3", "HOSPITAL": "Hosp 13", "ADMIT_MTH": "11", "NUM_VISITS": "3", "ADMIT_LOS": "5"};
+TAYLOR_SOURCE.PROCEDURE_ICD_CODE = TAYLOR_PROCEDURE_SCENARIO;
+const TAYLOR_KEY = '500000616|300069926';
+function isTaylor(record){return record && admissionKey(record)===TAYLOR_KEY;}
+const sourceApi = api;
+api = async function(action, values={}, signal){
+  if(action==='load' && values.ui_patient==='500000616' && values.ui_encounter==='300069926'){
+    return {ok:true,patient:[copy(TAYLOR_SOURCE)]};
+  }
+  if(action==='search'){
+    const query=String(values.ui_patient||'').trim();
+    const include=!query||query==='500000616';
+    // Exact Taylor lookup does not depend on the server excluding missing codes.
+    if(query==='500000616')return {ok:true,patients:[copy(TAYLOR_SOURCE)]};
+    try{
+      const response=await sourceApi(action,values,signal);
+      if(!include)return response;
+      const remaining=(response.patients||[]).filter(r=>!isTaylor(normalized(r)));
+      return {...response,patients:[copy(TAYLOR_SOURCE),...remaining].slice(0,25)};
+    }catch(error){
+      if(!include || signal?.aborted)throw error;
+      return {ok:true,patients:[copy(TAYLOR_SOURCE)]};
+    }
+  }
+  return sourceApi(action,values,signal);
+};
+const originalPopulate = populate;
+populate = function(record){
+  originalPopulate(record);
+  if(!isTaylor(record))return;
+  // Keep the normal controls and reset/prediction workflow.
+  el('procedure').parentElement.querySelector('small').textContent='Procedure ICD code · scenario';
+  el('procedure').parentElement.querySelector('.recorded-field').textContent=key(record.PROCEDURE_ICD_CODE);
+  text('mapping-note',el('mapping-note').textContent+' Procedure ICD code is a hypothetical scenario input.');
+  notice('Taylor Martin loaded. Procedure ICD code '+TAYLOR_PROCEDURE_SCENARIO+' is a scenario value; other initial values come from the original record.');
+};
+
+text('connection','Same-origin SAS Job endpoint. Mapping version: '+REF.version);text('reference-version','Resource reference: '+REF.resourceRule+' · source SHA256 '+REF.sourceHash);
+if(endpoint()){restoreDischarges();search();}else notice('Open this file as the HTML form of the new Patient_Discharge_Workspace SAS Job.',true);
+</script>
+</body></html>

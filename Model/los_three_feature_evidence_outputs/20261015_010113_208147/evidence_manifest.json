@@ -1,0 +1,46 @@
+{
+  "baseline_run": "/Users/jmj3047/Library/CloudStorage/GoogleDrive-kathy.minjee.jang@gmail.com/\u1102\u1162 \u1103\u1173\u1105\u1161\u110b\u1175\u1107\u1173/2026/\u1112\u1161\u1107\u1161\u11ab\u1100\u1175/UC/11522_Technology Capstone Research Project PG/Model/external_los_comparison_outputs/20261014_231637_044250",
+  "preprocessing_run": "/Users/jmj3047/Library/CloudStorage/GoogleDrive-kathy.minjee.jang@gmail.com/\u1102\u1162 \u1103\u1173\u1105\u1161\u110b\u1175\u1107\u1173/2026/\u1112\u1161\u1107\u1161\u11ab\u1100\u1175/UC/11522_Technology Capstone Research Project PG/Model/external_los_preprocessing_outputs/20261014_224830_037913",
+  "seed": 42,
+  "subsets": {
+    "Common only": [],
+    "COMORBIDITY_INDEX": [
+      "COMORBIDITY_INDEX"
+    ],
+    "CARE_TEAM_SIZE": [
+      "CARE_TEAM_SIZE"
+    ],
+    "MONITORING_HOURS": [
+      "MONITORING_HOURS"
+    ],
+    "COMORBIDITY_INDEX + CARE_TEAM_SIZE": [
+      "COMORBIDITY_INDEX",
+      "CARE_TEAM_SIZE"
+    ],
+    "COMORBIDITY_INDEX + MONITORING_HOURS": [
+      "COMORBIDITY_INDEX",
+      "MONITORING_HOURS"
+    ],
+    "CARE_TEAM_SIZE + MONITORING_HOURS": [
+      "CARE_TEAM_SIZE",
+      "MONITORING_HOURS"
+    ],
+    "All three": [
+      "COMORBIDITY_INDEX",
+      "CARE_TEAM_SIZE",
+      "MONITORING_HOURS"
+    ]
+  },
+  "permutation_repeats": 20,
+  "bootstrap_draws": 1000,
+  "train_cv_folds": 3,
+  "test_status": "Previously inspected test; exploratory evidence, not independent confirmation",
+  "primary_status": "Extended candidate; admission timing and target-independent generation unconfirmed",
+  "source_files": {
+    "/Users/jmj3047/Library/CloudStorage/GoogleDrive-kathy.minjee.jang@gmail.com/\u1102\u1162 \u1103\u1173\u1105\u1161\u110b\u1175\u1107\u1173/2026/\u1112\u1161\u1107\u1161\u11ab\u1100\u1175/UC/11522_Technology Capstone Research Project PG/Data/raw/table_CAPSTONE_2026_TRAIN_SET.csv": "a506f9032092954a2f118b740a121c34de3a66def0fa49ba4355d7974236b22b",
+    "/Users/jmj3047/Library/CloudStorage/GoogleDrive-kathy.minjee.jang@gmail.com/\u1102\u1162 \u1103\u1173\u1105\u1161\u110b\u1175\u1107\u1173/2026/\u1112\u1161\u1107\u1161\u11ab\u1100\u1175/UC/11522_Technology Capstone Research Project PG/EDA/READMIT_3000_FE.xlsx": "0d77a9b87a96a8eca7d6fee9acaa9c7f8e17a15067c429c64b05742183b0d9ad",
+    "/Users/jmj3047/Library/CloudStorage/GoogleDrive-kathy.minjee.jang@gmail.com/\u1102\u1162 \u1103\u1173\u1105\u1161\u110b\u1175\u1107\u1173/2026/\u1112\u1161\u1107\u1161\u11ab\u1100\u1175/UC/11522_Technology Capstone Research Project PG/EDA/READMIT_3000.xlsx": "dd765bac873a00fd7fc0a89b216fa3ecfd34b323df0294fb5fed3fa3ac10c3d1",
+    "/Users/jmj3047/Library/CloudStorage/GoogleDrive-kathy.minjee.jang@gmail.com/\u1102\u1162 \u1103\u1173\u1105\u1161\u110b\u1175\u1107\u1173/2026/\u1112\u1161\u1107\u1161\u11ab\u1100\u1175/UC/11522_Technology Capstone Research Project PG/EDA/READMIT_FE.xlsx": "f938de1bad9622c5f2d944748f4802b19ed42ce2b9e5a3c086f5a0245ad8035e"
+  },
+  "helper_sha256": "3a59734c0915c7e45e9feec0692258571e03d9dbb530f66a03adc0b56d04d4a5"
+}

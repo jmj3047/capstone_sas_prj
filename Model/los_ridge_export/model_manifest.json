@@ -1,0 +1,66 @@
+{
+  "source_workbook": "EDA/READMIT_FE.xlsx",
+  "sheet": "READMIT_LOS",
+  "source_sha256": "f938de1bad9622c5f2d944748f4802b19ed42ce2b9e5a3c086f5a0245ad8035e",
+  "notebook": "Model/TOTAL_LOS_FE_tuning.ipynb",
+  "reconstructed_not_original_in_memory_object": true,
+  "previous_notebook_hash_prefix": "afdf8c444f80c930",
+  "workbook_binary_matches_previous": false,
+  "variant": "+ ICD family / chronic band",
+  "alpha": 1,
+  "seed": 42,
+  "training_policy": "Fit TRAIN only; validation and test excluded from fit. No new tuning.",
+  "features": [
+    "PATIENT_AGE",
+    "NUM_CHRONIC_COND",
+    "NUM_VISITS",
+    "DOCTOR",
+    "DEPARTMENT",
+    "GENDER",
+    "Patient location",
+    "RACE_CD",
+    "ICD9_TARGET",
+    "DIAGNOSIS_ICD_CODE"
+  ],
+  "target": "TOTAL_LOS",
+  "metrics": {
+    "train": {
+      "rows": 2380,
+      "MAE": 4.364569202358793,
+      "RMSE": 6.417752403934546,
+      "R2": 0.28300528582376316
+    },
+    "validation": {
+      "rows": 298,
+      "MAE": 5.065881115314069,
+      "RMSE": 7.641973439910378,
+      "R2": 0.12183461881019586
+    },
+    "test": {
+      "rows": 298,
+      "MAE": 5.5682539876395065,
+      "RMSE": 8.739358143160358,
+      "R2": 0.2006105958445592
+    },
+    "train_5fold_CV": {
+      "MAE_mean": 4.8430342454342545,
+      "RMSE_mean": 7.047705773238173,
+      "MAE_by_fold": [
+        4.635747344353085,
+        4.623915191294036,
+        4.8475096604790595,
+        5.299760061100877,
+        4.808238969944216
+      ]
+    }
+  },
+  "versions": {
+    "python": "3.12.14",
+    "scikit-learn": "1.9.1",
+    "numpy": "2.3.5",
+    "pandas": "2.2.3",
+    "scipy": "1.18.1"
+  },
+  "sas_status": "Not uploaded, not tested in SAS. Model file alone is not deployment.",
+  "pickle_sha256": "010051d90fd70df48632b32d3bca64584485f7bc8f6a0bccc66e239196ef6e52"
+}

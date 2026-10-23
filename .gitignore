@@ -1,0 +1,16 @@
+.DS_Store
+__pycache__/
+.ipynb_checkpoints/
+.venv/
+.env
+.env.*
+.ssh/
+ssh_keys/
+*.pem
+*.ppk
+id_rsa*
+id_ecdsa*
+id_ed25519*
+sas_github*
+Data/
+EDA/

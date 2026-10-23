@@ -1,0 +1,45 @@
+{
+  "winner": "+ Full treatment journey",
+  "validation": {
+    "AP": 0.8926374673126806,
+    "ROC_AUC": 0.9691009886653725,
+    "Brier": 0.04509474561671986
+  },
+  "baseline_test": {
+    "AP": 0.8898741568167364,
+    "ROC_AUC": 0.9690825399167684,
+    "Brier": 0.044279927917186455
+  },
+  "journey_test": {
+    "AP": 0.8932961890777986,
+    "ROC_AUC": 0.9698753546128669,
+    "Brier": 0.043348666081848536
+  },
+  "test_AP_gain": 0.003422032261062191,
+  "paired_patient_gain_95": [
+    0.0009372669805502778,
+    0.006428165708409703
+  ],
+  "patient_overlap": 0,
+  "added_features": [
+    "PRIOR_COMPLETED_PROC_30D",
+    "PRIOR_COMPLETED_PROC_365D",
+    "PRIOR_RX_STARTS_30D",
+    "PRIOR_RX_STARTS_365D",
+    "ACTIVE_RX_CODES_AT_ADMISSION",
+    "CURRENT_IP_COMPLETED_PROC_RECORDS",
+    "CURRENT_IP_UNIQUE_PROC_CODES",
+    "CURRENT_IP_RX_RECORDS",
+    "CURRENT_IP_UNIQUE_RX_CODES",
+    "CURRENT_IP_RX_ENDED_BY_DISCHARGE",
+    "ACTIVE_RX_CODES_AT_DISCHARGE",
+    "NEW_ACTIVE_RX_CODES_VS_ADMISSION",
+    "RX_STARTS_LAST_30D_AT_DISCHARGE",
+    "CURRENT_IP_PROC_TEXT",
+    "CURRENT_IP_RX_TEXT",
+    "ACTIVE_RX_AT_DISCHARGE_TEXT"
+  ],
+  "clinical_validation": false,
+  "retain_previous_if_validation_not_improved": false,
+  "warning": "Procedure records are not surgery counts; RxNorm product counts are not ingredient counts or adherence. Planned admissions included; follow-up proxy unverified; old holdout reused."
+}

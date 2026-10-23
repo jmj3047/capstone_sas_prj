@@ -1,0 +1,88 @@
+{
+  "parameters": {
+    "n_estimators": 400,
+    "learning_rate": 0.05,
+    "max_depth": 5,
+    "min_samples_leaf": 50,
+    "subsample": 0.8,
+    "max_features": 0.8
+  },
+  "features": [
+    "AGE_AT_ADMISSION",
+    "PRIOR_INPATIENT_EPISODES",
+    "CONFIRMED_CONDITION_CODE_COUNT_AT_DISCHARGE",
+    "DAYS_SINCE_PREV_DISCHARGE",
+    "PREVIOUS_IP_LOS_DAYS",
+    "PREV_GAP_BETWEEN_ADMISSIONS",
+    "PRIOR_IP_30D",
+    "PRIOR_IP_90D",
+    "PRIOR_IP_365D",
+    "PRIOR_ED_30D",
+    "PRIOR_ED_365D",
+    "PRIOR_URGENTCARE_30D",
+    "PRIOR_OUTPATIENT_30D",
+    "PRIOR_AMBULATORY_30D",
+    "PRIOR_GAP_MEAN_3",
+    "PRIOR_GAP_SD_3",
+    "PRIOR_GAP_MEAN_5",
+    "PRIOR_GAP_SD_5",
+    "PRIOR_SHORT_RETURN_RATE_5",
+    "PRIOR_LOS_MEAN_3",
+    "CURRENT_VS_PRIOR_GAP_RATIO",
+    "CURRENT_REASON_PREVIOUS_COUNT",
+    "NEW_CODES_VS_PREVIOUS",
+    "REMOVED_CODES_VS_PREVIOUS",
+    "CODE_JACCARD_PREVIOUS",
+    "PRIOR_IDENTICAL_CODE_SET_EPISODES",
+    "DAYS_SINCE_NEWEST_CODE_FIRST_OBSERVED",
+    "CODES_FIRST_OBSERVED_WITHIN_30D",
+    "DAYS_SINCE_CURRENT_REASON_FIRST_OBSERVED",
+    "PRIOR_COMPLETED_PROC_30D",
+    "PRIOR_COMPLETED_PROC_365D",
+    "PRIOR_RX_STARTS_30D",
+    "PRIOR_RX_STARTS_365D",
+    "ACTIVE_RX_CODES_AT_ADMISSION",
+    "CURRENT_IP_COMPLETED_PROC_RECORDS",
+    "CURRENT_IP_UNIQUE_PROC_CODES",
+    "CURRENT_IP_RX_RECORDS",
+    "CURRENT_IP_UNIQUE_RX_CODES",
+    "CURRENT_IP_RX_ENDED_BY_DISCHARGE",
+    "ACTIVE_RX_CODES_AT_DISCHARGE",
+    "NEW_ACTIVE_RX_CODES_VS_ADMISSION",
+    "RX_STARTS_LAST_30D_AT_DISCHARGE",
+    "GENDER",
+    "FIRST_DESCRIPTION",
+    "FIRST_REASONCODE",
+    "RACE",
+    "PREVIOUS_REASONCODE",
+    "ACTIVE_CODES_TEXT",
+    "CURRENT_IP_PROC_TEXT",
+    "CURRENT_IP_RX_TEXT",
+    "ACTIVE_RX_AT_DISCHARGE_TEXT"
+  ],
+  "baseline_run": "/Users/jmj3047/Library/CloudStorage/GoogleDrive-kathy.minjee.jang@gmail.com/\u1102\u1162 \u1103\u1173\u1105\u1161\u110b\u1175\u1107\u1173/2026/\u1112\u1161\u1107\u1161\u11ab\u1100\u1175/UC/11522_Technology Capstone Research Project PG/Model/csiro_gb_dynamics_outputs/20261015_024436",
+  "split_assignment": "/Users/jmj3047/Library/CloudStorage/GoogleDrive-kathy.minjee.jang@gmail.com/\u1102\u1162 \u1103\u1173\u1105\u1161\u110b\u1175\u1107\u1173/2026/\u1112\u1161\u1107\u1161\u11ab\u1100\u1175/UC/11522_Technology Capstone Research Project PG/Model/csiro_readmission_model_outputs/20261015_014411/csiro_split_assignment.csv.gz",
+  "seed": 42,
+  "cv_folds": 3,
+  "tuning_patients": 5000,
+  "code_vocabulary_max": 40,
+  "code_min_df": 10,
+  "source_fingerprint": {
+    "Model/csiro_gb_feature_cache/expanded_episodes.csv.gz": {
+      "size": 21954958,
+      "mtime_ns": 1791990767798570803
+    },
+    "Data/csiro_synthea_csv/encounters.csv": {
+      "size": 2252389311,
+      "mtime_ns": 1788047913197149038
+    },
+    "Data/csiro_synthea_csv/procedures.csv": {
+      "size": 2302137015,
+      "mtime_ns": 1788048185174494504
+    },
+    "Data/csiro_synthea_csv/medications.csv": {
+      "size": 1734617207,
+      "mtime_ns": 1788048093395198510
+    }
+  }
+}
