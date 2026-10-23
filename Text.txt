@@ -1,1 +1,0 @@
-Verify Git connection from new SAS account
